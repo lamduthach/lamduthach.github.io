@@ -17,11 +17,15 @@
 <div id="container"></div>
 <button type="button" onclick="exportHighChart()"> export Chart </button>
 <script>
-    Highcharts.wrap(Highcharts.Chart.prototype, 'exportChartLocal', function (proceed, options) {
-        if (options && options.type === 'application/pdf') {
-            this.exportChart(options);
-        } else {
-            proceed.call(this, options);
+    Highcharts.setOptions({
+        chart: {
+            style: {
+                fontFamily: 'Noto Sans JP, sans-serif'
+            }
+        },
+        lang: {
+            decimalPoint: '.',
+            thousandsSep: ','
         }
     });
 
@@ -44,7 +48,7 @@
         },
 
         subtitle: {
-            text: 'Click the button to download as PNG, JPEG, SVG or PDF'
+            text: 'ボタンをクリックして、PNG、JPEG、SVG、または PDF としてダウンロードします'
         },
 
         chart: {
@@ -61,7 +65,7 @@
         }]
     });
 
-    var exportHighChart = function () {
+    var exportHighChart = function (type) {
         chart.exportChart({
             type: 'image/png',
             filename: 'highcharts-export'
