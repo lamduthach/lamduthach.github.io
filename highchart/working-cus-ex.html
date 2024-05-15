@@ -1,0 +1,116 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+<script src="jquery.js"></script>
+<style>
+    #container {
+        max-width: 800px;
+        height: 400px;
+        margin: 1em auto;
+    }
+
+    blockquote {
+        background-color: grey;
+    }
+
+    textarea {
+        width: 100%;
+        background-color: #c3c3c3;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    .highcharts-exporting-group {
+    }
+</style>
+
+<div>This example Hidden "highcharts-button-box" (contextmenu) <img style="width: 20px;" src="https://as2.ftcdn.net/v2/jpg/01/09/84/11/1000_F_109841191_B1qcKCxRwwt4DWIBpXD7bc4IPcozRBzT.jpg"> </div>
+<div>But create Custom button can trigger "highcharts-contextmenu" </div>
+
+<hr>
+<div>1. hide "highcharts-button-box" which show contextmenu</div>
+
+<blockquote>
+    <textarea readonly style="height: 60px;">
+        .highcharts-exporting-group {
+            display: none;
+        }
+    </textarea>
+</blockquote>
+
+<hr>
+
+<div>2. introduce code trigger in js</div>
+
+<blockquote>
+    <textarea readonly style="height: 75px;">
+        var exportChart = function (type) {
+            var target = $('#container .highcharts-menu-item:contains("'+type+'")')
+            target.click();
+        }
+    </textarea>
+</blockquote>
+
+<div> Example Button</div>
+
+<button type="button" onclick="exportChart('PNG')">Export PNG</button>
+<button type="button" onclick="exportChart('JPEG')">Export JPEG</button>
+<button type="button" onclick="exportChart('PDF')">Export PDF</button>
+<button type="button" onclick="exportChart('SVG')">Export SVG</button>
+
+<div id="container"></div>
+
+<script>
+    Highcharts.chart('container', {
+        exporting: {
+            chartOptions: { // specific options for the exported image
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                }
+            },
+            fallbackToExportServer: false
+        },
+
+        title: {
+            text: '日本語で HighChart をテストする'
+        },
+
+        subtitle: {
+            text: 'ボタンをクリックして、PNG、JPEG、SVG、または PDF としてダウンロードします'
+        },
+
+        chart: {
+            type: 'area'
+        },
+
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+
+        series: [{
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 126.0, 148.5, 216.4, 194.1, 95.6, 54.4]
+        }],
+        exporting: {
+            pdfFont: {
+                normal: 'NotoSans-Regular.ttf',
+                bold: 'NotoSans-Bold.ttf',
+                bolditalic: 'NotoSans-BoldItalic.ttf',
+                italic: 'NotoSans-Italic.ttf'
+            }
+        }
+    });
+
+    var exportChart = function (type) {
+        var targetMenu = $('#container .highcharts-exporting-group');
+        targetMenu.click();
+        var target = $('#container .highcharts-menu-item:contains("'+type+'")');
+        target.click();
+    }
+</script>
