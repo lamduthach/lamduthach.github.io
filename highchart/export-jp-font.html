@@ -68,14 +68,14 @@
     var exportHighChart = function (type) {
         chart.exportChart({
             type: 'image/png',
-            filename: 'highcharts-export'
-            // chartOptions: {
-            //     chart: {
-            //         style: {
-            //             fontFamily: 'Noto Sans JP, sans-serif'
-            //         }
-            //     }
-            // }
+            filename: 'highcharts-export',
+            chartOptions: {
+                chart: {
+                    style: {
+                        fontFamily: 'Noto Sans JP, sans-serif'
+                    }
+                }
+            }
         });
     }
 
