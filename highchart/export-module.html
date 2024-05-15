@@ -9,6 +9,7 @@
 }
 </style>
 <div id="container"></div>
+<button type="button" onclick="exportHighChart()"> export Chart </button>
 <script>
     Highcharts.wrap(Highcharts.Chart.prototype, 'exportChartLocal', function (proceed, options) {
 		if (options && options.type === 'application/pdf') {
@@ -53,5 +54,19 @@ Highcharts.chart('container', {
         data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 126.0, 148.5, 216.4, 194.1, 95.6, 54.4]
     }]
 });
+
+var exportHighChart = function () {
+    $('#container').highcharts().exportChart({
+                    type: 'image/png',
+                    filename: 'highcharts-export'
+                    // chartOptions: {
+                    //     chart: {
+                    //         style: {
+                    //             fontFamily: 'Noto Sans JP, sans-serif'
+                    //         }
+                    //     }
+                    // }
+                });
+}
 
 </script>
