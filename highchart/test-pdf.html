@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Highcharts with Japanese Fonts Export to PDF</title>
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -10,12 +11,14 @@
         body {
             font-family: 'Noto Sans JP', sans-serif;
         }
+
         #container {
             width: 100%;
             height: 400px;
         }
     </style>
 </head>
+
 <body>
     <div id="container"></div>
     <button id="exportBtn">Export as PDF</button>
@@ -65,11 +68,19 @@
                         }
                     }
                 }
+            },
+            exporting: {
+                pdfFont: {
+                    normal: 'https://www.highcharts.com/samples/data/fonts/NotoSans-Regular.ttf',
+                    bold: 'https://www.highcharts.com/samples/data/fonts/NotoSans-Bold.ttf',
+                    bolditalic: 'https://www.highcharts.com/samples/data/fonts/NotoSans-BoldItalic.ttf',
+                    italic: 'https://www.highcharts.com/samples/data/fonts/NotoSans-Italic.ttf'
+                }
             }
         });
 
         // Set up the export button
-        document.getElementById('exportBtn').addEventListener('click', function() {
+        document.getElementById('exportBtn').addEventListener('click', function () {
             chart.exportChart({
                 type: 'application/pdf',
                 filename: 'highcharts-export',
@@ -84,4 +95,5 @@
         });
     </script>
 </body>
+
 </html>
