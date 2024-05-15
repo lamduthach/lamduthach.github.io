@@ -12,6 +12,14 @@
 <div id="container"></div>
 <button type="button" onclick="exportHighChart()"> export Chart </button>
 <script>
+    Highcharts.wrap(Highcharts.Chart.prototype, 'exportChartLocal', function (proceed, options) {
+        if (options && options.type === 'application/pdf') {
+            this.exportChart(options);
+        } else {
+            proceed.call(this, options);
+        }
+    });
+
     var chart = Highcharts.chart('container', {
         exporting: {
             chartOptions: { // specific options for the exported image
