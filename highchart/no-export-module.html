@@ -18,7 +18,7 @@
     }
 });
 
-Highcharts.chart('container', {
+var chart = Highcharts.chart('container', {
     exporting: {
         chartOptions: { // specific options for the exported image
             plotOptions: {
@@ -55,7 +55,7 @@ Highcharts.chart('container', {
 });
 
 var exportHighChart = function () {
-    $('#container').highcharts().exportChart({
+    chart.exportChart({
                     type: 'image/png',
                     filename: 'highcharts-export'
                     // chartOptions: {
