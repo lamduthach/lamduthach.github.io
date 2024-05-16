@@ -22,11 +22,11 @@
         cursor: pointer;
     }
 
-    .highcharts-exporting-group {
-    }
+    .highcharts-exporting-group {}
 </style>
 
-<div>This example Hidden "highcharts-button-box" (contextmenu) <img style="width: 20px;" src="https://as2.ftcdn.net/v2/jpg/01/09/84/11/1000_F_109841191_B1qcKCxRwwt4DWIBpXD7bc4IPcozRBzT.jpg"> </div>
+<div>This example Hidden "highcharts-button-box" (contextmenu) <img style="width: 20px;"
+        src="https://as2.ftcdn.net/v2/jpg/01/09/84/11/1000_F_109841191_B1qcKCxRwwt4DWIBpXD7bc4IPcozRBzT.jpg"> </div>
 <div>But create Custom button can trigger "highcharts-contextmenu" </div>
 
 <hr>
@@ -99,10 +99,10 @@
         }],
         exporting: {
             pdfFont: {
-                normal: 'https://lamduthach.github.io./highchart/NotoSans-Regular.ttf',
-                bold: 'https://lamduthach.github.io./highchart/NotoSans-Bold.ttf',
-                bolditalic: 'https://lamduthach.github.io./highchart/NotoSans-BoldItalic.ttf',
-                italic: 'https://lamduthach.github.io./highchart/NotoSans-Italic.ttf'
+                normal: 'https://www.highcharts.com/samples/data/fonts/NotoSans-Regular.ttf',
+                bold: 'https://www.highcharts.com/samples/data/fonts/NotoSans-Bold.ttf',
+                bolditalic: 'https://www.highcharts.com/samples/data/fonts/NotoSans-BoldItalic.ttf',
+                italic: 'https://www.highcharts.com/samples/data/fonts/NotoSans-Italic.ttf'
             }
         }
     });
@@ -110,7 +110,7 @@
     var exportChart = function (type) {
         var targetMenu = $('#container .highcharts-exporting-group');
         targetMenu.click();
-        var target = $('#container .highcharts-menu-item:contains("'+type+'")');
+        var target = $('#container .highcharts-menu-item:contains("' + type + '")');
         target.click();
     }
 </script>
