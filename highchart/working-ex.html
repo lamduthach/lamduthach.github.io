@@ -62,7 +62,7 @@
     </textarea>
 </blockquote>
 
-<button type="button"> Fail to Encode </button>
+<button type="button" onclick="exportChart()"> Fail to Encode </button>
 <hr>
 <div>As document we have to use <a href="https://www.highcharts.com/docs/export-module/export-module-overview">HighChart
         export-module</a></div>
@@ -99,66 +99,60 @@
 
 <script>
     // Load the font and configure Highcharts to use it
-    document.fonts.load('10pt "Noto Sans JP"').then(function () {
-        Highcharts.setOptions({
-            chart: {
-                style: {
-                    fontFamily: 'Noto Sans JP, sans-serif'
-                }
-            },
-            lang: {
-                decimalPoint: '.',
-                thousandsSep: ','
+    Highcharts.setOptions({
+        chart: {
+            style: {
+                fontFamily: 'Noto Sans JP, sans-serif'
             }
-        });
+        },
+        lang: {
+            decimalPoint: '.',
+            thousandsSep: ','
+        }
+    });
 
-        var chart = Highcharts.chart('container', {
-            title: {
-                text: '日本語で HighChart をテストする'
-            },
+    var chart = Highcharts.chart('container', {
+        title: {
+            text: '日本語で HighChart をテストする'
+        },
 
-            subtitle: {
-                text: 'ボタンをクリックして、PNG、JPEG、SVG、または PDF としてダウンロードします'
-            },
+        subtitle: {
+            text: 'ボタンをクリックして、PNG、JPEG、SVG、または PDF としてダウンロードします'
+        },
 
-            chart: {
-                type: 'area'
-            },
+        chart: {
+            type: 'area'
+        },
 
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
 
-            series: [{
-                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 126.0, 148.5, 216.4, 194.1, 95.6, 54.4]
-            }],
-            exporting: {
-                pdfFont: {
-                    normal: 'NotoSans-Regular.ttf',
-                    bold: 'NotoSans-Bold.ttf',
-                    bolditalic: 'NotoSans-BoldItalic.ttf',
-                    italic: 'NotoSans-Italic.ttf'
-                }
+        series: [{
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 126.0, 148.5, 216.4, 194.1, 95.6, 54.4]
+        }],
+        exporting: {
+            pdfFont: {
+                normal: 'NotoSans-Regular.ttf',
+                bold: 'NotoSans-Bold.ttf',
+                bolditalic: 'NotoSans-BoldItalic.ttf',
+                italic: 'NotoSans-Italic.ttf'
             }
-        });
-        
-        var exportChart = function () {
-            chart.exportChart({
-                type: 'image/png',
-                filename: 'highcharts-export',
-                chartOptions: {
-                    chart: {
-                        style: {
-                            fontFamily: 'Noto Sans JP, sans-serif'
-                        }
+        }
+    });
+
+    var exportChart = function () {
+        chart.exportChart({
+            type: 'image/png',
+            filename: 'highcharts-export',
+            chartOptions: {
+                chart: {
+                    style: {
+                        fontFamily: 'Noto Sans JP, sans-serif'
                     }
                 }
-            });
-        }
-
-        $('button').on('click', function () {
-            exportChart();
+            }
         });
-    });
+    }
 </script>
