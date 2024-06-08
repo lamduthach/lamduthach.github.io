@@ -32,3 +32,17 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+var download = function (file) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8');
+    element.setAttribute('download', file);
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+var downloadCVs = function () {
+    download("resource/LamDuThach_CV_EN.xlsx");
+    download("resource/LamDuThach_CV_VN.xlsx");
+}
