@@ -35,14 +35,14 @@ window.addEventListener('DOMContentLoaded', event => {
 
 var download = function (file) {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8');
-    element.setAttribute('download', file);
+    element.setAttribute('href', document.location.origin + document.location.pathname + "resource/" + file);
+    element.setAttribute('target', "_blank");
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
 }
 
 var downloadCVs = function () {
-    download(document.location.origin + document.location.pathname + "resource/LamDuThach_CV_EN.xlsx");
-    download(document.location.origin + document.location.pathname + "resource/LamDuThach_CV_VN.xlsx");
+    download("LamDuThach_CV_EN.xlsx");
+    download("LamDuThach_CV_VN.xlsx");
 }
