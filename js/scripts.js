@@ -43,6 +43,6 @@ var download = function (file) {
 }
 
 var downloadCVs = function () {
-    download("resource/LamDuThach_CV_EN.xlsx");
-    download("resource/LamDuThach_CV_VN.xlsx");
+    download(document.location.origin + document.location.pathname + "resource/LamDuThach_CV_EN.xlsx");
+    download(document.location.origin + document.location.pathname + "resource/LamDuThach_CV_VN.xlsx");
 }
