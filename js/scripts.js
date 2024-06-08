@@ -34,15 +34,20 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 
 var download = function (file) {
-    var element = document.createElement('a');
-    element.setAttribute('href', document.location.origin + document.location.pathname + "resource/" + file);
-    element.setAttribute('target', "_blank");
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            var element = document.createElement('a');
+            element.setAttribute('href', document.location.origin + document.location.pathname + "resource/" + file);
+            element.setAttribute('target', "_blank");
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            resolve(true)
+        }, 300);
+    });
 }
 
 var downloadCVs = function () {
-    download("LamDuThach_CV_EN.xlsx");
-    download("LamDuThach_CV_VN.xlsx");
+    download("LamDuThach_CV_EN.xlsx")
+    .then(() => {download("LamDuThach_CV_VN.xlsx"); });
 }
