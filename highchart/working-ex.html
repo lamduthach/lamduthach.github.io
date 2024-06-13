@@ -1,65 +1,99 @@
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
-<script src="jquery.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
 
-<style>
-    #container {
-        max-width: 800px;
-        height: 400px;
-        margin: 1em auto;
-    }
+<head>
+    <meta name="robots" content="noindex">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
+    <script src="jquery.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 
-    blockquote {
-        background-color: grey;
-    }
 
-    textarea {
-        width: 100%;
-        background-color: #c3c3c3;
-    }
+    <!-- Begin Mieruca Embed Code -->
+    <script type="text/javascript" id="mierucajs">
+        window.__fid = window.__fid || []; __fid.push([947672503]);
+        (function () {
+            function mieruca() { if (typeof window.__fjsld != "undefined") return; window.__fjsld = 1; var fjs = document.createElement('script'); fjs.type = 'text/javascript'; fjs.async = true; fjs.id = "fjssync"; var timestamp = new Date; fjs.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://hm.mieru-ca.com/service/js/mieruca-hm.js?v=' + timestamp.getTime(); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(fjs, x); };
+            setTimeout(mieruca, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent("onload", mieruca) : window.addEventListener("load", mieruca, false)) : mieruca();
+        })();
+    </script>
+    <!-- End Mieruca Embed Code -->
 
-    button {
-        cursor: pointer;
-    }
+    <!-- Mieruca Optimize Tag -->
+    <script type="text/javascript" id="mierucaOptimizejs">
+        window.__optimizeid = window.__optimizeid || []; __optimizeid.push([1686628642]);
+        (function () {
+            var fjs = document.createElement('script'); fjs.type = 'text/javascript';
+            fjs.async = true; fjs.id = "fjssync"; var timestamp = new Date; fjs.src = 'https://opt.mieru-ca.com/service/js/mieruca-optimize.js?v=' + timestamp.getTime();
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(fjs, x);
+        })();
+    </script>
+    <!-- End Mieruca Optimize Tag -->
 
-    @font-face {
-        font-family: 'unicode-NotoSans-Regular';
-        src: url('../NotoSans-Regular.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: block;
-    }
-    @font-face {
-        font-family: 'unicode-NotoSans-Bold';
-        src: url('../NotoSans-Bold.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: block;
-    }
-    @font-face {
-        font-family: 'unicode-NotoSans-Italic';
-        src: url('../NotoSans-Italic.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: block;
-    }
-    @font-face {
-        font-family: 'unicode-NotoSans-BoldItalic';
-        src: url('../NotoSans-BoldItalic.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-        font-display: block;
-    }
-</style>
-<h1>Basic Example export HighChart with Japanese</h1>
 
-<div>The encoding not working even we introduce font character in our site</div>
-<div> Example : </div>
+    <style>
+        #container {
+            max-width: 800px;
+            height: 400px;
+            margin: 1em auto;
+        }
 
-<blockquote>
-    <textarea readonly style="height: 435px;">
+        blockquote {
+            background-color: grey;
+        }
+
+        textarea {
+            width: 100%;
+            background-color: #c3c3c3;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        @font-face {
+            font-family: 'unicode-NotoSans-Regular';
+            src: url('../NotoSans-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        @font-face {
+            font-family: 'unicode-NotoSans-Bold';
+            src: url('../NotoSans-Bold.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        @font-face {
+            font-family: 'unicode-NotoSans-Italic';
+            src: url('../NotoSans-Italic.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        @font-face {
+            font-family: 'unicode-NotoSans-BoldItalic';
+            src: url('../NotoSans-BoldItalic.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Basic Example export HighChart with Japanese</h1>
+
+    <div>The encoding not working even we introduce font character in our site</div>
+    <div> Example : </div>
+
+    <blockquote>
+        <textarea readonly style="height: 435px;">
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
         <script>
             Highcharts.setOptions({
@@ -89,19 +123,20 @@
             }
         </script>
     </textarea>
-</blockquote>
+    </blockquote>
 
-<button type="button" onclick="exportChart()"> Fail to Encode </button>
-<hr>
-<div>As document we have to use <a href="https://www.highcharts.com/docs/export-module/export-module-overview">HighChart
-        export-module</a></div>
-<div>And we have to import font when export with PDF<a
-        href="https://api.highcharts.com/highcharts/exporting.pdfFont">HighChart
-        export-module</a></div>
-<div> Example introduce </div>
+    <button type="button" onclick="exportChart()"> Fail to Encode </button>
+    <hr>
+    <div>As document we have to use <a
+            href="https://www.highcharts.com/docs/export-module/export-module-overview">HighChart
+            export-module</a></div>
+    <div>And we have to import font when export with PDF<a
+            href="https://api.highcharts.com/highcharts/exporting.pdfFont">HighChart
+            export-module</a></div>
+    <div> Example introduce </div>
 
-<blockquote>
-    <textarea readonly style="height: 270px;">
+    <blockquote>
+        <textarea readonly style="height: 270px;">
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>
@@ -120,88 +155,71 @@
             });
         </script>
     </textarea>
-</blockquote>
+    </blockquote>
 
-<div>please click "highcharts-button-box" <img style="width: 20px;"
-        src="https://as2.ftcdn.net/v2/jpg/01/09/84/11/1000_F_109841191_B1qcKCxRwwt4DWIBpXD7bc4IPcozRBzT.jpg"> </div>
-<div id="container"></div>
+    <div>please click "highcharts-button-box" <img style="width: 20px;"
+            src="https://as2.ftcdn.net/v2/jpg/01/09/84/11/1000_F_109841191_B1qcKCxRwwt4DWIBpXD7bc4IPcozRBzT.jpg"> </div>
+    <div id="container"></div>
 
-<script>
-    // Load the font and configure Highcharts to use it
-    Highcharts.setOptions({
-        chart: {
-            style: {
-                fontFamily: 'Noto Sans JP, sans-serif'
+    <script>
+        // Load the font and configure Highcharts to use it
+        Highcharts.setOptions({
+            chart: {
+                style: {
+                    fontFamily: 'Noto Sans JP, sans-serif'
+                }
+            },
+            lang: {
+                decimalPoint: '.',
+                thousandsSep: ','
             }
-        },
-        lang: {
-            decimalPoint: '.',
-            thousandsSep: ','
-        }
-    });
+        });
 
-    var chart = Highcharts.chart('container', {
-        title: {
-            text: '日本語で HighChart をテストする'
-        },
+        var chart = Highcharts.chart('container', {
+            title: {
+                text: '日本語で HighChart をテストする'
+            },
 
-        subtitle: {
-            text: 'ボタンをクリックして、PNG、JPEG、SVG、または PDF としてダウンロードします'
-        },
+            subtitle: {
+                text: 'ボタンをクリックして、PNG、JPEG、SVG、または PDF としてダウンロードします'
+            },
 
-        chart: {
-            type: 'area'
-        },
+            chart: {
+                type: 'area'
+            },
 
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
+            xAxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            },
 
-        series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 126.0, 148.5, 216.4, 194.1, 95.6, 54.4]
-        }],
-        exporting: {
-            pdfFont: {
-                normal: 'https://lamduthach.github.io./highchart/NotoSans-Regular.ttf',
-                bold: 'https://lamduthach.github.io./highchart/NotoSans-Bold.ttf',
-                bolditalic: 'https://lamduthach.github.io./highchart/NotoSans-BoldItalic.ttf',
-                italic: 'https://lamduthach.github.io./highchart/NotoSans-Italic.ttf'
-            }
-        }
-    });
-
-    var exportChart = function () {
-        chart.exportChart({
-            type: 'image/png',
-            filename: 'highcharts-export',
-            chartOptions: {
-                chart: {
-                    style: {
-                        fontFamily: 'Noto Sans JP, sans-serif'
-                    }
+            series: [{
+                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 126.0, 148.5, 216.4, 194.1, 95.6, 54.4]
+            }],
+            exporting: {
+                pdfFont: {
+                    normal: 'https://lamduthach.github.io./highchart/NotoSans-Regular.ttf',
+                    bold: 'https://lamduthach.github.io./highchart/NotoSans-Bold.ttf',
+                    bolditalic: 'https://lamduthach.github.io./highchart/NotoSans-BoldItalic.ttf',
+                    italic: 'https://lamduthach.github.io./highchart/NotoSans-Italic.ttf'
                 }
             }
         });
-    }
-</script>
 
-<!-- Begin Mieruca Embed Code -->
-<script type="text/javascript" id="mierucajs">
-    window.__fid = window.__fid || [];__fid.push([947672503]);
-    (function() {
-    function mieruca(){if(typeof window.__fjsld != "undefined") return; window.__fjsld = 1; var fjs = document.createElement('script'); fjs.type = 'text/javascript'; fjs.async = true; fjs.id = "fjssync"; var timestamp = new Date;fjs.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://hm.mieru-ca.com/service/js/mieruca-hm.js?v='+ timestamp.getTime(); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(fjs, x); };
-    setTimeout(mieruca, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent("onload", mieruca) : window.addEventListener("load", mieruca, false)) : mieruca();
-    })();
+        var exportChart = function () {
+            chart.exportChart({
+                type: 'image/png',
+                filename: 'highcharts-export',
+                chartOptions: {
+                    chart: {
+                        style: {
+                            fontFamily: 'Noto Sans JP, sans-serif'
+                        }
+                    }
+                }
+            });
+        }
     </script>
-    <!-- End Mieruca Embed Code -->
+</body>
 
-<!-- Mieruca Optimize Tag -->
-<script type="text/javascript" id="mierucaOptimizejs">
-    window.__optimizeid = window.__optimizeid || [];__optimizeid.push([1686628642]);
-    (function () {var fjs = document.createElement('script');fjs.type = 'text/javascript';
-    fjs.async = true;fjs.id = "fjssync";var timestamp = new Date;fjs.src = 'https://opt.mieru-ca.com/service/js/mieruca-optimize.js?v=' + timestamp.getTime();
-    var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(fjs, x);})();
-    </script>
-    <!-- End Mieruca Optimize Tag -->
-    
+</html>
