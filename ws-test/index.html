@@ -1,34 +1,50 @@
 <head>
     <title>Testing site</title>
     <script src="jquery-3.4.1.min.js"></script>
+    <!-- Mieruca Optimize Tag -->
+    <script type="text/javascript" id="mierucaOptimizejs">
+        window.__optimizeid = window.__optimizeid || []; __optimizeid.push([1534030138]);
+        (function () {
+            var fjs = document.createElement('script'); fjs.type = 'text/javascript';
+            fjs.async = true; fjs.id = "fjssync"; var timestamp = new Date; fjs.src = 'https://dev.opt.mieru-ca.com/service/js/mieruca-optimize-dev.js?v=' + timestamp.getTime();
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(fjs, x);
+        })();
+    </script>
+    <!-- End Mieruca Optimize Tag -->
+
     <script type="text/javascript" id="mierucajs">
         window.__fid = window.__fid || []; __fid.push([855465450]);
         (function () {
-            function mieruca() { 
-                if (typeof window.__fjsld != "undefined") return; 
-                window.__fjsld = 1; 
-                var fjs = document.createElement('script'); 
-                fjs.type = 'text/javascript'; 
-                fjs.async = true; 
-                fjs.id = "fjssync"; 
-                var timestamp = new Date; 
+            function mieruca() {
+                if (typeof window.__fjsld != "undefined") return;
+                window.__fjsld = 1;
+                var fjs = document.createElement('script');
+                fjs.type = 'text/javascript';
+                fjs.async = true;
+                fjs.id = "fjssync";
+                var timestamp = new Date;
                 // fjs.src = 'https://hm.mieru-ca.com/service/js/mieruca-hm-retry.js?v=' + timestamp.getTime(); 
                 // fjs.src = 'https://s3.ap-northeast-1.amazonaws.com/hm.mieru-ca.com/service/js/mieruca-hm-retry.js?v=' + timestamp.getTime();
-                fjs.src = 'https://hm.mieru-ca.com/service/js/mieruca-hm.js?v=' + timestamp.getTime(); 
+                fjs.src = 'https://hm.mieru-ca.com/service/js/mieruca-hm.js?v=' + timestamp.getTime();
                 // fjs.src = 'https://lamduthach.github.io/ws-test/test-pro.js';
                 var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(fjs, x); };
-            setTimeout(mieruca, 500); 
+                x.parentNode.insertBefore(fjs, x);
+            };
+            setTimeout(mieruca, 500);
             document.readyState != "complete" ? (window.attachEvent ? window.attachEvent("onload", mieruca) : window.addEventListener("load", mieruca, false)) : mieruca();
         })();
     </script>
 </head>
+
 <body>
     <textarea style="height: 500px;background: red;">Test content</textarea>
     <a href="/jobfind-pc/area/All?merit=1030">
         <picture class="kv_sliderImg">
-          <source srcset="https://itoyokado-saiyou.net/jobfind-pc/original/images/bnr-opening_staff.png" media="(max-width: 767px)" type="image/png" width="315" height="110">
-          <img data-src="https://itoyokado-saiyou.net/jobfind-pc/original/images/bnr-opening_staff.png" alt="オープニングスタッフの求人を見る" class=" lazyloaded" width="750" height="140" data-expand="100" src="https://itoyokado-saiyou.net/jobfind-pc/original/images/bnr-opening_staff.png">
+            <source srcset="https://itoyokado-saiyou.net/jobfind-pc/original/images/bnr-opening_staff.png"
+                media="(max-width: 767px)" type="image/png" width="315" height="110">
+            <img data-src="https://itoyokado-saiyou.net/jobfind-pc/original/images/bnr-opening_staff.png"
+                alt="オープニングスタッフの求人を見る" class=" lazyloaded" width="750" height="140" data-expand="100"
+                src="https://itoyokado-saiyou.net/jobfind-pc/original/images/bnr-opening_staff.png">
         </picture>
-      </a>
+    </a>
 </body>
