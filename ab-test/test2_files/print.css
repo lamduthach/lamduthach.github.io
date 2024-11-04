@@ -1,0 +1,24 @@
+/*
+Theme Name: CT
+*/
+
+
+/* ///////////////////////////////////////////////////////////////////
+
+print
+
+/////////////////////////////////////////////////////////////////// */
+
+
+@media print {
+	body {
+		background: none !important;
+		color: #000000;
+	}
+	#site {
+		background: none !important;
+	}
+	a {
+		text-decoration: none;
+	}
+}

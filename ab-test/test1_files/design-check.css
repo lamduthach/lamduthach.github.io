@@ -1,0 +1,95 @@
+body {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-monotone.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-monotone.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-monotone.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-monotone.png);
+}
+body.site-color-blue {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-blue.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-blue.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-blue.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-blue.png);
+}
+body.site-color-red {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-red.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-red.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-red.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-red.png);
+}
+body.site-color-orange {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-orange.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-orange.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-orange.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-orange.png);
+}
+body.site-color-green {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-green.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-green.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-green.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-green.png);
+}
+body.site-color-green2 {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-green2.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-green2.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-green2.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-green2.png);
+}
+body.site-color-pink {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-pink.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-pink.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-pink.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-pink.png);
+}
+body.site-color-purple {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-purple.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-purple.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-purple.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-purple.png);
+}
+body.site-color-brown {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-brown.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-brown.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-brown.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-brown.png);
+}
+body.site-color-monotone {
+  --design-check-05: url(https://theme.selfull.jp/images/common/check-05-monotone.png);
+  --design-check-06: url(https://theme.selfull.jp/images/common/check-06-monotone.png);
+  --design-check-07: url(https://theme.selfull.jp/images/common/check-07-monotone.png);
+  --design-check-08: url(https://theme.selfull.jp/images/common/check-08-monotone.png);
+}
+
+
+.design-check-01 .list-block ul.check li,
+.design-check-01 .entry-content .editor ul li {
+  background-image: url(https://theme.selfull.jp/images/common/check-01.png);
+}
+.design-check-02 .list-block ul.check li,
+.design-check-02 .entry-content .editor ul li {
+  background-image: url(https://theme.selfull.jp/images/common/check-02.png);
+}
+.design-check-03 .list-block ul.check li,
+.design-check-03 .entry-content .editor ul li {
+  background-image: url(https://theme.selfull.jp/images/common/check-03.png);
+}
+.design-check-04 .list-block ul.check li,
+.design-check-04 .entry-content .editor ul li {
+  background-image: url(https://theme.selfull.jp/images/common/check-04.png);
+}
+
+.design-check-05 .list-block ul.check li,
+.design-check-05 .entry-content .editor ul li {
+  background-image: var(--design-check-05);
+}
+.design-check-06 .list-block ul.check li,
+.design-check-06 .entry-content .editor ul li {
+  background-image: var(--design-check-06);
+}
+.design-check-07 .list-block ul.check li,
+.design-check-07 .entry-content .editor ul li {
+  background-image: var(--design-check-07);
+}
+.design-check-08 .list-block ul.check li,
+.design-check-08 .entry-content .editor ul li {
+  background-image: var(--design-check-08);
+}
