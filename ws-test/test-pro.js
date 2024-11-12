@@ -103,7 +103,7 @@ var MierucaHM = function() {
             }
             ;
             addLog('open WS : ' + t.sWs + (t.ire ? "&retry=1" : ""));
-            addLog('UA : ' + e.ua);
+            addLog('UA : ' + navigator.userAgent || navigator.vendor || window.opera);
             for (var e = document.querySelectorAll("label,a,input,button,textarea,img,iframe,video"), o = 0; o < e.length; o += 1)
                 a.setEventClickListener(e[o]);
             window.addEventListener("scroll", (function() {
