@@ -73,10 +73,12 @@ var MierucaHM = function() {
             }
             ,
             l.onclose = function(e) {
+                console.log(e);
                 t.iwc = 1
             }
             ,
             l.onerror = function(e) {
+                console.log(e);
                 0 === t.ire && (t.ire = 1,
                 setTimeout(( () => {
                     a.sendPageView()
