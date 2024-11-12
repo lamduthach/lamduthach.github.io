@@ -85,7 +85,7 @@ var MierucaHM = function() {
             }
             ,
             l.onclose = function(e) {
-                addLog('WS close : ' + e.code, true);
+                addLog('WS close : ' + e.code);
                 t.iwc = 1
             }
             ,
@@ -109,7 +109,7 @@ var MierucaHM = function() {
                 "IS_ALLOW_LOAD_POPUP" !== e.data ? e.data.startsWith("refId-") ? window.__hmrid = e.data.split("-")[1] : e.data.startsWith("urlId-") && (window.__hmuid = e.data.split("-")[1]) : a.popupHandle()
             }
             ;
-            addLog('open WS : ' + t.sWs + (t.ire ? "&retry=1" : ""));
+            addLog('open WS : ' + t.sWs + (t.ire ? "&retry=1" : ""), true);
             addLog('UA : ' + navigator.userAgent || navigator.vendor || window.opera);
             for (var e = document.querySelectorAll("label,a,input,button,textarea,img,iframe,video"), o = 0; o < e.length; o += 1)
                 a.setEventClickListener(e[o]);
