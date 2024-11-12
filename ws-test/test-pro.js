@@ -1,3 +1,10 @@
+var logDiv = document.getElementById('log');
+function addLog(text) {
+    var newText = document.createTextNode(text); 
+    var newLine = document.createElement('br'); 
+    logDiv.appendChild(newText); 
+    logDiv.appendChild(newLine);
+}
 var MierucaHM = function() {
     "use strict";
     var e, t = {
@@ -73,12 +80,13 @@ var MierucaHM = function() {
             }
             ,
             l.onclose = function(e) {
-                console.log(e);
+                addLog('WS close : ' + e.code);
                 t.iwc = 1
             }
             ,
             l.onerror = function(e) {
-                console.log(e);
+                addLog('WS error : ');
+                addLog(e);
                 0 === t.ire && (t.ire = 1,
                 setTimeout(( () => {
                     a.sendPageView()
@@ -94,6 +102,7 @@ var MierucaHM = function() {
                 "IS_ALLOW_LOAD_POPUP" !== e.data ? e.data.startsWith("refId-") ? window.__hmrid = e.data.split("-")[1] : e.data.startsWith("urlId-") && (window.__hmuid = e.data.split("-")[1]) : a.popupHandle()
             }
             ;
+            addLog('open WS : ' + t.sWs + (t.ire ? "&retry=1" : ""));
             for (var e = document.querySelectorAll("label,a,input,button,textarea,img,iframe,video"), o = 0; o < e.length; o += 1)
                 a.setEventClickListener(e[o]);
             window.addEventListener("scroll", (function() {
