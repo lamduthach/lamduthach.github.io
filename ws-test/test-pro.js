@@ -79,7 +79,6 @@ var MierucaHM = function() {
                 e.ipa = "ipa",
                 e.ua = navigator.userAgent || navigator.vendor || window.opera,
                 l.sendMessage(JSON.stringify(e));
-                addLog('WS send : ' + JSON.stringify(e));
             }
             ,
             l.onclose = function(e) {
@@ -98,7 +97,8 @@ var MierucaHM = function() {
             }
             ,
             l.sendMessage = function(e) {
-                "" !== e && 0 === t.iwc && l.readyState === l.OPEN && l.send(e)
+                "" !== e && 0 === t.iwc && l.readyState === l.OPEN && l.send(e);
+                addLog('WS send : ' + JSON.stringify(e));
             }
             ,
             l.onmessage = function(e) {
