@@ -85,13 +85,12 @@ var MierucaHM = function() {
             }
             ,
             l.onclose = function(e) {
-                addLog('WS close : ' + e.code);
+                addLog('WS close : ' + e.code + ' ' + e.reason, true);
                 t.iwc = 1
             }
             ,
             l.onerror = function(e) {
-                addLog('WS error : ');
-                addLog(e);
+                addLog('WS error : ' + error.message, true);
                 0 === t.ire && (t.ire = 1,
                 setTimeout(( () => {
                     a.sendPageView()
