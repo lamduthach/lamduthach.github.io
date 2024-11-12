@@ -1,12 +1,14 @@
 var logDiv = document.getElementById('log');
 function addLog(text, isAlert) {
-    var newText = document.createTextNode(text);
+    var newText = document.createElement(text);
+    var span = document.createElement('span');
+    span.appendChild(newText);
     if (isAlert) {
-        newText.style.color = 'red';
+        span.style.color = 'red';
     }
-    var timeTxt = document.createTextNode('time : ' + new Date().toISOString()); 
-    logDiv.appendChild(newText);
+    logDiv.appendChild(span);
     logDiv.appendChild(document.createElement('br'));
+    var timeTxt = document.createTextNode('time : ' + new Date().toISOString()); 
     logDiv.appendChild(timeTxt);
     logDiv.appendChild(document.createElement('br'));
 }
