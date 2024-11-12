@@ -1,6 +1,9 @@
 var logDiv = document.getElementById('log');
-function addLog(text) {
-    var newText = document.createTextNode(text); 
+function addLog(text, isAlert) {
+    var newText = document.createTextNode(text);
+    if (isAlert) {
+        newText.style.color = 'red';
+    }
     var timeTxt = document.createTextNode('time : ' + new Date().toISOString()); 
     logDiv.appendChild(newText);
     logDiv.appendChild(document.createElement('br'));
@@ -82,7 +85,7 @@ var MierucaHM = function() {
             }
             ,
             l.onclose = function(e) {
-                addLog('WS close : ' + e.code);
+                addLog('WS close : ' + e.code, true);
                 t.iwc = 1
             }
             ,
