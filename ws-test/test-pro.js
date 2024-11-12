@@ -99,6 +99,7 @@ var MierucaHM = function() {
             }
             ,
             l.onmessage = function(e) {
+                addLog('WS message : ' + e.data);
                 "IS_ALLOW_LOAD_POPUP" !== e.data ? e.data.startsWith("refId-") ? window.__hmrid = e.data.split("-")[1] : e.data.startsWith("urlId-") && (window.__hmuid = e.data.split("-")[1]) : a.popupHandle()
             }
             ;
