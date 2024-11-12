@@ -1,9 +1,11 @@
 var logDiv = document.getElementById('log');
 function addLog(text) {
     var newText = document.createTextNode(text); 
-    var newLine = document.createElement('br'); 
-    logDiv.appendChild(newText); 
-    logDiv.appendChild(newLine);
+    var timeTxt = document.createTextNode('time : ' + new Date().toISOString()); 
+    logDiv.appendChild(newText);
+    logDiv.appendChild(document.createElement('br'));
+    logDiv.appendChild(timeTxt);
+    logDiv.appendChild(document.createElement('br'));
 }
 var MierucaHM = function() {
     "use strict";
