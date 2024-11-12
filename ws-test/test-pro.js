@@ -76,7 +76,8 @@ var MierucaHM = function() {
                 e.wH = n,
                 e.ipa = "ipa",
                 e.ua = navigator.userAgent || navigator.vendor || window.opera,
-                l.sendMessage(JSON.stringify(e))
+                l.sendMessage(JSON.stringify(e));
+                addLog('WS send : ' + JSON.stringify(e));
             }
             ,
             l.onclose = function(e) {
