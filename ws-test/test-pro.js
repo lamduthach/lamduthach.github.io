@@ -1,6 +1,6 @@
 var logDiv = document.getElementById('log');
 function addLog(text, isAlert) {
-    var newText = document.createElement(text);
+    var newText = document.createTextNode(text);
     var span = document.createElement('span');
     span.appendChild(newText);
     if (isAlert) {
