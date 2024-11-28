@@ -10970,3 +10970,7 @@ section.resume-section .resume-section-content {
     padding-bottom: 5rem;
   }
 }
+
+.text-primary-test {
+  font-size: 95px !important; 
+}
