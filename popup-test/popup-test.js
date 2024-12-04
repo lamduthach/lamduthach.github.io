@@ -128,6 +128,16 @@
                         history.pushState(null, null, null);
                     }
                 }, { capture: true }),
+                window.addEventListener('pagehide', (event) => {
+                    // If the event's persisted property is `true` the page is about
+                    // to enter the back/forward cache, which is also in the frozen state.
+                    // If the event's persisted property is not `true` the page is
+                    // about to be unloaded.
+                    if (event.persisted) {
+                        addLog('pagehide');
+                        history.pushState(null, null, null);
+                    }
+                }, { capture: true }),
                 window.onpopstate = function(e) {
                     addLog('popstate fired');
                     addLog('e.state : ' + e.state);
