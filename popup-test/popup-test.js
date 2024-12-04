@@ -122,22 +122,22 @@
             (
                 setTimeout(function() { history.replaceState({initPage: !0}, null, null); addLog('replaceState'); }, 100),
                 setTimeout(function() { history.pushState(null, null, null); addLog('pushState'); addLog('window.onpopstate : ' + window.onpopstate ) }, 200),
-                window.addEventListener('pageshow', (event) => {
-                    if (event.persisted) {
-                        addLog('pageshow');
-                        history.pushState(null, null, null);
-                    }
-                }, { capture: true }),
-                window.addEventListener('pagehide', (event) => {
-                    // If the event's persisted property is `true` the page is about
-                    // to enter the back/forward cache, which is also in the frozen state.
-                    // If the event's persisted property is not `true` the page is
-                    // about to be unloaded.
-                    if (event.persisted) {
-                        addLog('pagehide');
-                        history.pushState(null, null, null);
-                    }
-                }, { capture: true }),
+                // window.addEventListener('pageshow', (event) => {
+                //     if (event.persisted) {
+                //         addLog('pageshow');
+                //         history.pushState(null, null, null);
+                //     }
+                // }, { capture: true }),
+                // window.addEventListener('pagehide', (event) => {
+                //     // If the event's persisted property is `true` the page is about
+                //     // to enter the back/forward cache, which is also in the frozen state.
+                //     // If the event's persisted property is not `true` the page is
+                //     // about to be unloaded.
+                //     if (event.persisted) {
+                //         addLog('pagehide');
+                //         history.pushState(null, null, null);
+                //     }
+                // }, { capture: true }),
                 window.onpopstate = function(e) {
                     addLog('popstate fired');
                     addLog('e.state : ' + e.state);

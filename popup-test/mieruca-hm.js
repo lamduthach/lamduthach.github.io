@@ -193,7 +193,7 @@ var MierucaHM = function() {
             let e = document.createElement("script");
             e.type = "text/javascript",
             e.async = !0,
-            e.src = "https://lamduthach.github.io/popup-test/popup-test.js?service=heatmap-popup&tokenId=" + window.__fid[0][0] + "&protocol=" + window.location.protocol + "&hostname=" + window.location.hostname + "&pathname=" + encodeURIComponent(window.location.pathname) + "&search=" + encodeURIComponent(window.location.search) + "&hash=" + encodeURIComponent(window.location.hash) + "&dv=" + t.device;
+            e.src = "https://lamduthach.github.io/popup-test/popup-test.js?time="+ (new Date().getTime)+ "&service=heatmap-popup&tokenId=" + window.__fid[0][0] + "&protocol=" + window.location.protocol + "&hostname=" + window.location.hostname + "&pathname=" + encodeURIComponent(window.location.pathname) + "&search=" + encodeURIComponent(window.location.search) + "&hash=" + encodeURIComponent(window.location.hash) + "&dv=" + t.device;
             let i = document.getElementsByTagName("script")[0];
             i.parentNode.insertBefore(e, i)
         }
