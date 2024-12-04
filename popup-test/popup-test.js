@@ -140,7 +140,6 @@
                 // }, { capture: true }),
                 window.onpopstate = () => setTimeout(function(e) {
                     addLog('popstate fired');
-                    addLog('e.state : ' + e.state);
                     addLog('history.state : ' + history.state);
                     addLog('history.state.initPage : ' + history.state.initPage);
                     setTimeout(function() { history.replaceState(null, null, null);}, 500);
