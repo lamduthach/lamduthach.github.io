@@ -127,7 +127,7 @@
                         addLog('pageshow');
                         history.pushState(null, null, null);
                     }
-                }, opts),
+                }, { capture: true }),
                 window.onpopstate = function(e) {
                     addLog('popstate fired');
                     addLog('e.state : ' + e.state);
