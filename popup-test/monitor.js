@@ -2,17 +2,8 @@
 
     function addLog(text, isAlert) {
         var logDiv = document.getElementById('log');
-        var newText = document.createTextNode(text);
-        var span = document.createElement('span');
-        span.appendChild(newText);
-        if (isAlert) {
-            span.style.color = 'red';
-        }
-        logDiv.appendChild(span);
-        logDiv.appendChild(document.createElement('br'));
-        var timeTxt = document.createTextNode('time : ' + new Date().toISOString());
-        logDiv.appendChild(timeTxt);
-        logDiv.appendChild(document.createElement('br'));
+        logDiv.value += '\n' + text;
+        logDiv.value += '\n' + 'time : ' + new Date().toISOString();
     }
 
     const getState = () => {
