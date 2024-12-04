@@ -143,7 +143,7 @@
                     addLog('e.state : ' + e.state);
                     addLog('history.state : ' + history.state);
                     addLog('history.state.initPage : ' + history.state.initPage);
-                    // history.replaceState(null, null, null);
+                    setTimeout(function() { history.replaceState(null, null, null);}, 500);
                     // l();
                 }
                 // window.onpopstate = () => setTimeout(function() {history.state && history.state.initPage && (history.replaceState(null, null, null), l())}, 0)
