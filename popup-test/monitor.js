@@ -15,6 +15,16 @@
         logDiv.appendChild(document.createElement('br'));
     }
 
+    const getState = () => {
+        if (document.visibilityState === 'hidden') {
+          return 'hidden';
+        }
+        if (document.hasFocus()) {
+          return 'active';
+        }
+        return 'passive';
+    };
+
     // Stores the initial state using the `getState()` function (defined above).
     let state = getState();
 
