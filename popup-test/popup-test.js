@@ -117,11 +117,12 @@
             (
                 history.replaceState({initPage: !0}, null, null), 
                 history.pushState(null, null, null),
-                setTimeout(function() {
-                    window.addEventListener("popstate", e => {
-                        history.state && history.state.initPage && (history.replaceState(null, null, null), l())
-                    })
-                }, 0)
+                window.onpopstate = () => setTimeout(function() {history.state && history.state.initPage && (history.replaceState(null, null, null), l())}, 0)
+                // setTimeout(function() {
+                //     window.addEventListener("popstate", e => {
+                //         history.state && history.state.initPage && (history.replaceState(null, null, null), l())
+                //     })
+                // }, 0)
             ), document.querySelectorAll("#mieruca_heatmap_popup .mieruca-heatmap-click-link").length > 0 && document.querySelectorAll("#mieruca_heatmap_popup .mieruca-heatmap-click-link")[0].addEventListener("click", function()
                 {
                         i()
