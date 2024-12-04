@@ -121,7 +121,7 @@
         if ("show_by_exit" === a.popup_condition_show && 
             (
                 setTimeout(function() { history.replaceState({initPage: !0}, null, null); addLog('replaceState'); }, 100),
-                setTimeout(function() { history.pushState(null, null, null); addLog('pushState'); addLog('window.onpopstate : ' + window.onpopstate ) }, 300),
+                setTimeout(function() { history.pushState(null, null, null); addLog('pushState'); addLog('window.onpopstate : ' + window.onpopstate ) }, 200),
                 window.onpopstate = function(e) {
                     addLog('popstate fired');
                     addLog('e.state : ' + e.state);
