@@ -1,7 +1,7 @@
 (function () {
 
-    var logDiv = document.getElementById('log');
     function addLog(text, isAlert) {
+        var logDiv = document.getElementById('log');
         var newText = document.createTextNode(text);
         var span = document.createElement('span');
         span.appendChild(newText);
