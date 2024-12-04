@@ -121,8 +121,14 @@
         if ("show_by_exit" === a.popup_condition_show && 
             (
                 setTimeout(function() { history.replaceState({initPage: !0}, null, null); addLog('replaceState'); }, 100),
-                setTimeout(function() { history.pushState(null, null, null); addLog('pushState'); }, 300),
-                window.onpopstate = () => setTimeout(function() {history.state && history.state.initPage && (history.replaceState(null, null, null), l())}, 0)
+                setTimeout(function() { history.pushState(null, null, null); addLog('pushState'); addLog('window.onpopstate : ' + window.onpopstate ) }, 300),
+                window.onpopstate = function(e) {
+                    addLog('popstate fired');
+                    addLog('e.state : ' + e.state);
+                    addLog('history.state : ' + history.state);
+                    addLog('history.state.initPage : ' + history.state.initPage);
+                }
+                // window.onpopstate = () => setTimeout(function() {history.state && history.state.initPage && (history.replaceState(null, null, null), l())}, 0)
                 // setTimeout(function() {
                 //     window.addEventListener("popstate", e => {
                 //         history.state && history.state.initPage && (history.replaceState(null, null, null), l())
