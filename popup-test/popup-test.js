@@ -122,6 +122,12 @@
             (
                 setTimeout(function() { history.replaceState({initPage: !0}, null, null); addLog('replaceState'); }, 100),
                 setTimeout(function() { history.pushState(null, null, null); addLog('pushState'); addLog('window.onpopstate : ' + window.onpopstate ) }, 200),
+                window.addEventListener('pageshow', (event) => {
+                    if (event.persisted) {
+                        addLog('pageshow');
+                        history.pushState(null, null, null);
+                    }
+                }, opts),
                 window.onpopstate = function(e) {
                     addLog('popstate fired');
                     addLog('e.state : ' + e.state);
