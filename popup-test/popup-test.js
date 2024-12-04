@@ -1,5 +1,10 @@
 (function()
 {
+    function addLog(text) {
+        var logDiv = document.getElementById('log');
+        logDiv.value += '\n' + text;
+        logDiv.value += '\n' + 'time : ' + new Date().toISOString();
+    };
         let e,
                 o,
                 a = {
@@ -115,8 +120,8 @@
         }
         if ("show_by_exit" === a.popup_condition_show && 
             (
-                history.replaceState({initPage: !0}, null, null), 
-                history.pushState(null, null, null),
+                setTimeout(function() { history.replaceState({initPage: !0}, null, null); addLog('replaceState'); }, 100),
+                setTimeout(function() { history.pushState(null, null, null); addLog('pushState'); }, 300),
                 window.onpopstate = () => setTimeout(function() {history.state && history.state.initPage && (history.replaceState(null, null, null), l())}, 0)
                 // setTimeout(function() {
                 //     window.addEventListener("popstate", e => {

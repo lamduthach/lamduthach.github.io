@@ -1,6 +1,6 @@
 (function () {
 
-    function addLog(text, isAlert) {
+    function addLog(text) {
         var logDiv = document.getElementById('log');
         logDiv.value += '\n' + text;
         logDiv.value += '\n' + 'time : ' + new Date().toISOString();
