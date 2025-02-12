@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('./bg-flowers.jpg') no-repeat center center/cover;
+            background: linear-gradient(to bottom, #cce7ff, #ffffff);
         }
         .letter {
             background: rgba(255, 255, 255, 0.9);
@@ -29,7 +29,22 @@
             position: absolute;
             width: 50px;
             height: 50px;
-            background: url('./flowers.png') no-repeat center center/cover;
+            background: radial-gradient(circle, #ffffff 30%, #6495ED 70%);
+            border-radius: 50%;
+        }
+        .flower::before, .flower::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .flower::before {
+            transform: translate(-25px, -10px);
+        }
+        .flower::after {
+            transform: translate(25px, -10px);
         }
         .flower.top-left { top: -20px; left: -20px; }
         .flower.top-right { top: -20px; right: -20px; }
