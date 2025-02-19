@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floral Letter</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #cce7ff, #ffffff);
+        }
+        .letter {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            max-width: 90%;
+            width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            position: relative;
+        }
+        .flower {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ffffff 30%, #6495ED 70%);
+            border-radius: 50%;
+        }
+        .flower::before, .flower::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .flower::before {
+            transform: translate(-25px, -10px);
+        }
+        .flower::after {
+            transform: translate(25px, -10px);
+        }
+        .flower.top-left { top: -20px; left: -20px; }
+        .flower.top-right { top: -20px; right: -20px; }
+        .flower.bottom-left { bottom: -20px; left: -20px; }
+        .flower.bottom-right { bottom: -20px; right: -20px; }
+    </style>
+</head>
+<body>
+    <div class="letter">
+        <div class="flower top-left"></div>
+        <div class="flower top-right"></div>
+        <div class="flower bottom-left"></div>
+        <div class="flower bottom-right"></div>
+        <h1>Dear Reader,</h1>
+        <p>This is a beautifully designed letter with a floral background.</p>
+        <p>Enjoy the elegance of blue and white flowers as your backdrop.</p>
+    </div>
+</body>
+</html>
