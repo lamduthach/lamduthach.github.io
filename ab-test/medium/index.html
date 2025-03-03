@@ -19,13 +19,12 @@
     <meta name="robots" content="noindex">
 
     <script>
-        Object.defineProperty(window.location, "reload", {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: function () {
-                console.log("Reload is disabled!");
-            },
+        window.location.reload = () => {
+            console.log("Reload attempt blocked!");
+        };
+        window.addEventListener("beforeunload", function (event) {
+            event.preventDefault();
+            event.returnValue = ""; // Needed for Chrome to show a warning
         });
     </script>
 
