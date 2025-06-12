@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Test Dom Event</title>
+    <script type="text/javascript">
+        var i = 0;
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM fully loaded and parsed with ' + i);
+            i++;
+        });
+        document.onreadystatechange = () => {
+            console.log(document.readyState + ' with ' + i);
+            i++;
+        };
+        window.addEventListener("load", (event) => {
+            console.log('page is fully loaded with ' + i);
+        });
+    </script>
+    <script type="text/javascript">
+        (
+            function () {
+                var fjs = document.createElement('script'); fjs.type = 'text/javascript';
+                fjs.async = true;
+                fjs.id = "fjssync";
+                var timestamp = new Date;
+                fjs.src = 'https://lamduthach.github.io/dom/test-import.js?v=' + timestamp.getTime();
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(fjs, x);
+            })();
+    </script>
+</head>
+<body>
+    <h1>Test Dom event</h1>
+    <div id="content"></div>
+</body>
+</html>
