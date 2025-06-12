@@ -8,15 +8,16 @@
     <script type="text/javascript">
         var i = 0;
         document.addEventListener('DOMContentLoaded', function () {
-            console.log('DOM fully loaded and parsed with ' + i);
+            console.log('DOM fully loaded and parsed with ' + i + ' at ' + new Date().toLocaleTimeString());
             i++;
         });
         document.onreadystatechange = () => {
-            console.log(document.readyState + ' with ' + i);
+            console.log(document.readyState + ' with ' + i + ' at ' + new Date().toLocaleTimeString());
             i++;
         };
         window.addEventListener("load", (event) => {
-            console.log('page is fully loaded with ' + i);
+            console.log('page is fully loaded with ' + i + ' at ' + new Date().toLocaleTimeString());
+            i++;
         });
     </script>
     <script type="text/javascript" id="mierucaOptimizejs">

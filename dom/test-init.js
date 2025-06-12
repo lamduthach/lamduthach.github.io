@@ -1,9 +1,9 @@
 (function () {
         var preInit = function () {
-            console.log("preInit " + new Date().toUTCString());
+            console.log("preInit");
         },
         init = () => {
-            console.log("init " + new Date().toUTCString());
+            console.log("init");
         };
     (function () {
         preInit();
