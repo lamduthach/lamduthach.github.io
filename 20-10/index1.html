@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20/10 - Ngày Phụ Nữ Việt Nam</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1E90FF 0%, #87CEEB 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="container">
+        <h1>🌸 20/10 🌸</h1>
+        <p>Ngày Phụ Nữ Việt Nam</p>
+        <p style="font-size: 1.1em; margin-top: 40px;">Em là hoa đẹp nhất trong vườn trái tim anh</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const flowers = ['🌸', '🌺', '🌻', '🌷', '💐', '🌹'];
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 30 + 20;
+                this.speedX = (Math.random() - 0.5) * 8;
+                this.speedY = (Math.random() - 0.5) * 8 - 2;
+                this.opacity = 1;
+                this.flower = flowers[Math.floor(Math.random() * flowers.length)];
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.1;
+                this.gravity = 0.15;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.speedY += this.gravity;
+                this.opacity -= 0.01;
+                this.rotation += this.rotationSpeed;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.font = `${this.size}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.fillText(this.flower, 0, 0);
+
+                ctx.restore();
+            }
+        }
+
+        function createFlowerBurst(x, y) {
+            if (x === undefined) x = canvas.width / 2;
+            if (y === undefined) y = canvas.height / 2;
+
+            for (let i = 0; i < 30; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        class Tulip {
+            constructor(x, baseY) {
+                this.x = x;
+                this.baseY = baseY;
+                this.swayAmount = 0;
+                this.swaySpeed = 0.02 + Math.random() * 0.02;
+                this.swayPhase = Math.random() * Math.PI * 2;
+            }
+
+            update() {
+                this.swayPhase += this.swaySpeed;
+                this.swayAmount = Math.sin(this.swayPhase) * 8;
+            }
+
+            draw() {
+                const x = this.x + this.swayAmount;
+
+                // Draw stem
+                ctx.strokeStyle = '#2d5016';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(x, this.baseY);
+                ctx.lineTo(x, this.baseY - 60);
+                ctx.stroke();
+
+                // Draw tulip petals with color
+                ctx.fillStyle = this.color || '#ff1493';
+                ctx.beginPath();
+                ctx.ellipse(x - 8, this.baseY - 50, 6, 15, -0.3, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(x, this.baseY - 55, 5, 16, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(x + 8, this.baseY - 50, 6, 15, 0.3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const tulipBaseY = canvas.height;
+        const tulips = [];
+
+        // Create multi-row tulip garden with pink and yellow flowers
+        for (let row = 0; row < 3; row++) {
+            const rowY = tulipBaseY - (row * 70);
+            const tulipsPerRow = 20 + row * 3;
+
+            for (let i = 0; i < tulipsPerRow; i++) {
+                const x = (i * (canvas.width / tulipsPerRow)) - 15 + Math.random() * 30;
+                const tulip = new Tulip(x, rowY);
+                tulip.color = (i + row) % 2 === 0 ? '#ff1493' : '#ffd700'; // Pink or Yellow
+                tulips.push(tulip);
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const fromGrassHeight = tulipBaseY;
+            const toGrassHeight = tulipBaseY - 10;
+            // Draw grass blades at bottom
+            ctx.strokeStyle = '#228B22';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < canvas.width; i += 8) {
+                const randomHeight = 60 + Math.random() * 0;
+                const randomSway = Math.sin(Date.now() * 0.001 + i) * 3;
+
+                ctx.beginPath();
+                ctx.moveTo(i + randomSway, fromGrassHeight);
+                ctx.quadraticCurveTo(i + randomSway + 5, fromGrassHeight - randomHeight * 0.5, i + randomSway + 2, fromGrassHeight - randomHeight);
+                ctx.stroke();
+            }
+
+            // Draw darker grass shadows
+            ctx.strokeStyle = '#1a6b1a';
+            ctx.lineWidth = 1;
+            for (let i = 4; i < canvas.width; i += 8) {
+                const randomHeight = 50 + Math.random() * 0;
+                const randomSway = Math.sin(Date.now() * 0.001 + i) * 2;
+
+                ctx.beginPath();
+                ctx.moveTo(i + randomSway, fromGrassHeight);
+                ctx.quadraticCurveTo(i + randomSway - 3, fromGrassHeight - randomHeight * 0.5, i + randomSway - 2, fromGrassHeight - randomHeight);
+                ctx.stroke();
+            }
+
+            // Draw grass texture
+            ctx.strokeStyle = '#1a6b1a';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < canvas.width; i += 15) {
+                ctx.beginPath();
+                ctx.moveTo(i, tulipBaseY - 80);
+                ctx.lineTo(i + 10, tulipBaseY - 70);
+                ctx.stroke();
+            }
+
+            // Update and draw tulips
+            tulips.forEach(tulip => {
+                tulip.update();
+                tulip.draw();
+            });
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+
+                if (particles[i].opacity <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        canvas.addEventListener('click', (e) => {
+            createFlowerBurst(e.clientX, e.clientY);
+        });
+
+        // Auto burst every 2 seconds
+        setInterval(() => {
+            const x1 = Math.random() * canvas.width;
+            const y1 = Math.random() * canvas.height * 0.6;
+            createFlowerBurst(x1, y1);
+
+            const x2 = Math.random() * canvas.width;
+            const y2 = Math.random() * canvas.height * 0.6;
+            createFlowerBurst(x2, y2);
+        }, 2000);
+
+        animate();
+    </script>
+</body>
+
+</html>
