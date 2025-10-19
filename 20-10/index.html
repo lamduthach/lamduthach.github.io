@@ -109,6 +109,31 @@
             transition: transform 0.5s ease;
             /* Add transition for hover effects if desired */
         }
+
+        /* Then add these responsive styles: */
+        @media screen and (max-width: 768px) {
+            .image-container {
+                width: 90%;
+                max-width: 280px;
+                height: auto;
+                margin: 0 auto;
+                padding: 8px;
+            }
+            
+            .limited-image {
+                max-height: 160px;
+                object-fit: contain;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            .image-container {
+                width: 95%;
+                height: auto;
+                padding: 5px;
+                box-shadow: 0 0 10px rgba(255, 192, 203, 0.5);
+            }
+        }
     </style>
 </head>
 
