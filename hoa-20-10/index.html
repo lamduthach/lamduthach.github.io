@@ -2241,15 +2241,59 @@
     #quote {
       position: fixed;
       top: 50%;
-      left: 25%;
-      transform: translate(-50%, -50%);
-      color: #fff;
-      font-family: "Source Sans Pro";
-      font-size: 2em;
-      font-weight: 900;
-      -webkit-user-select: none;
-      user-select: none;
-      z-index: 9999;
+      left: 0;
+      transform: translateY(-50%);
+      padding: 15px;
+      max-width: 300px;
+      background-color: rgba(255, 255, 255, 0.8);
+      /* Optional: semi-transparent background */
+      border-radius: 0 10px 10px 0;
+      /* Optional: rounded corners on the right side */
+      z-index: 1000;
+      text-align: left;
+    }
+
+    #quote h2 {
+      margin-top: 0;
+      font-size: 1.8em;
+    }
+
+    #quote p {
+      margin: 8px 0;
+      font-size: 1.2em;
+    }
+
+    /* Responsive adjustments for smartphones */
+    @media screen and (max-width: 768px) {
+      #quote {
+        padding: 10px;
+        max-width: 200px;
+      }
+
+      #quote h2 {
+        font-size: 1.5em;
+      }
+
+      #quote p {
+        font-size: 1em;
+        margin: 5px 0;
+      }
+    }
+
+    /* For very small screens */
+    @media screen and (max-width: 480px) {
+      #quote {
+        padding: 8px;
+        max-width: 160px;
+      }
+
+      #quote h2 {
+        font-size: 1.3em;
+      }
+
+      #quote p {
+        font-size: 0.9em;
+      }
     }
   </style>
 </head>
