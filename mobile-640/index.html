@@ -91,7 +91,7 @@
             <li><strong>width=640</strong>: Sets the viewport width to exactly 640px regardless of device</li>
             <li><strong>user-scalable=no</strong>: Prevents users from zooming in or out</li>
         </ul>
-        
+
         <label class="box box-full position-check">600px Width Box (Full Container)</label>
 
         <div class="box-sizes">
@@ -106,13 +106,65 @@
     <label class="viewport-indicator">Viewport: 640px</label>
 
     <div id="click_log">
-        </div>
-        
+    </div>
+
     <script>
+        // Add this function to get viewport dimensions and append to click_log
+        function appendViewportInfoToLog() {
+            const logElement = document.getElementById('click_log');
+            if (!logElement) return;
+
+            // Get viewport dimensions
+            const viewportWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            const viewportHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+            // Get device pixel ratio (for high-DPI screens)
+            const pixelRatio = window.devicePixelRatio || 1;
+
+            // Get screen dimensions
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+
+            // Create header for viewport information
+            const headerElement = document.createElement('div');
+            headerElement.innerHTML = '<strong>Viewport Information:</strong>';
+            headerElement.style.padding = '5px';
+            headerElement.style.borderBottom = '1px solid #ddd';
+            headerElement.style.backgroundColor = '#f5f5f5';
+            logElement.appendChild(headerElement);
+
+            // Create log entries
+            const viewportInfo = document.createElement('div');
+            viewportInfo.innerHTML = `<span style="color:#006600;">Viewport size:</span> ${viewportWidth}px × ${viewportHeight}px`;
+            viewportInfo.style.padding = '5px';
+            viewportInfo.style.borderBottom = '1px solid #eee';
+            logElement.appendChild(viewportInfo);
+
+            const screenInfo = document.createElement('div');
+            screenInfo.innerHTML = `<span style="color:#006600;">Screen size:</span> ${screenWidth}px × ${screenHeight}px`;
+            screenInfo.style.padding = '5px';
+            screenInfo.style.borderBottom = '1px solid #eee';
+            logElement.appendChild(screenInfo);
+
+            const ratioInfo = document.createElement('div');
+            ratioInfo.innerHTML = `<span style="color:#006600;">Device pixel ratio:</span> ${pixelRatio}`;
+            ratioInfo.style.padding = '5px';
+            ratioInfo.style.borderBottom = '1px solid #eee';
+            logElement.appendChild(ratioInfo);
+        }
+
         // Display actual viewport width
         function updateViewportDisplay() {
             const indicator = document.querySelector('.viewport-indicator');
             indicator.textContent = `Viewport: ${window.innerWidth}px`;
+
+            // Update viewport info in the log when viewport changes
+            const logElement = document.getElementById('click_log');
+            if (logElement) {
+                logElement.innerHTML = '';
+                appendViewportInfoToLog();
+                displayPositionCheckCoordinates();
+            }
         }
 
         // Add this to the HTML file at the end of the existing script tag
@@ -153,8 +205,11 @@
             });
         }
 
-        // Run when DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', displayPositionCheckCoordinates);
+        // Initialize everything on load
+        document.addEventListener('DOMContentLoaded', function () {
+            updateViewportDisplay();
+            displayPositionCheckCoordinates();
+        });
 
         // Update positions on window resize
         window.addEventListener('resize', function () {
