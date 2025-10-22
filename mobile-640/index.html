@@ -151,18 +151,21 @@
             logElement.appendChild(ratioInfo);
         }
 
-        // Display actual viewport width
-        function updateViewportDisplay() {
-            const indicator = document.querySelector('.viewport-indicator');
-            indicator.textContent = `Viewport: ${window.innerWidth}px`;
-
-            // Update viewport info in the log when viewport changes
+        function initializeViewportLog() {
             const logElement = document.getElementById('click_log');
             if (logElement) {
                 logElement.innerHTML = '';
                 appendViewportInfoToLog();
                 displayPositionCheckCoordinates();
             }
+        }
+
+        // Display actual viewport width
+        function updateViewportDisplay() {
+            const indicator = document.querySelector('.viewport-indicator');
+            indicator.textContent = `Viewport: ${window.innerWidth}px`;
+
+            initializeViewportLog();
         }
 
         // Add this to the HTML file at the end of the existing script tag
@@ -211,12 +214,7 @@
 
         // Update positions on window resize
         window.addEventListener('resize', function () {
-            const logElement = document.getElementById('click_log');
-            // Clear previous position entries before updating
-            if (logElement) {
-                logElement.innerHTML = '';
-                displayPositionCheckCoordinates();
-            }
+            initializeViewportLog();
         });
         updateViewportDisplay();
     </script>
