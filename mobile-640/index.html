@@ -103,13 +103,13 @@
 
     <label class="viewport-indicator">Viewport: 640px</label>
 
-    <div id="click_log">
+    <div id="div_log">
     </div>
 
     <script>
-        // Add this function to get viewport dimensions and append to click_log
+        // Add this function to get viewport dimensions and append to div_log
         function appendViewportInfoToLog() {
-            const logElement = document.getElementById('click_log');
+            const logElement = document.getElementById('div_log');
             if (!logElement) return;
 
             // Get viewport dimensions
@@ -155,7 +155,7 @@
         function displayPositionCheckCoordinates() {
             // Get all elements with position-check class
             const positionElements = document.querySelectorAll('.position-check');
-            const logElement = document.getElementById('click_log');
+            const logElement = document.getElementById('div_log');
 
             if (!logElement) return;
 
@@ -190,7 +190,7 @@
         }
 
         function initializeViewportLog() {
-            const logElement = document.getElementById('click_log');
+            const logElement = document.getElementById('div_log');
             if (logElement) {
                 logElement.innerHTML = '';
                 appendViewportInfoToLog();
