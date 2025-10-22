@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="target-densitydpi=device-dpi, width=640, user-scalable=no">
+    <title>640px Fixed Viewport Example</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .viewport-indicator {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        
+        .box {
+            height: 100px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .box-full {
+            width: 600px;
+            background-color: #3498db;
+        }
+        
+        .box-half {
+            width: 300px;
+            background-color: #e74c3c;
+        }
+        
+        .box-quarter {
+            width: 150px;
+            background-color: #2ecc71;
+        }
+
+        .box-sizes {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript" id="mierucajs">
+        window.__fid = window.__fid || []; __fid.push([359192189]);
+        (function () {
+            function mieruca() { if (typeof window.__fjsld != "undefined") return; window.__fjsld = 1; var fjs = document.createElement('script'); fjs.type = 'text/javascript'; fjs.async = true; fjs.id = "fjssync"; var timestamp = new Date; fjs.src = 'https://lamduthach.github.io/js/mieruca-hm.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(fjs, x); };
+            setTimeout(mieruca, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent("onload", mieruca) : window.addEventListener("load", mieruca, false)) : mieruca();
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Fixed 640px Viewport Example</h1>
+        
+        <p>This page demonstrates a viewport with a fixed width of 640px using the meta tag:</p>
+        
+        <pre><code>&lt;meta name="viewport" content="target-densitydpi=device-dpi, width=640, user-scalable=no"&gt;</code></pre>
+        
+        <p>This configuration:</p>
+        <ul>
+            <li><strong>target-densitydpi=device-dpi</strong>: Attempts to match the screen's native DPI (deprecated but included as requested)</li>
+            <li><strong>width=640</strong>: Sets the viewport width to exactly 640px regardless of device</li>
+            <li><strong>user-scalable=no</strong>: Prevents users from zooming in or out</li>
+        </ul>
+
+        <div id="click_log">
+        </div>
+        
+        <div class="box box-full">600px Width Box (Full Container)</div>
+        
+        <div class="box-sizes">
+            <div class="box box-half">300px Width</div>
+            <div class="box box-quarter">150px Width</div>
+        </div>
+        
+        <p>Note: This fixed 640px approach means the layout will be consistent across devices, but may appear small on high-resolution screens or large on small screens.</p>
+    </div>
+    
+    <div class="viewport-indicator">Viewport: 640px</div>
+    
+    <script>
+        // Display actual viewport width
+        function updateViewportDisplay() {
+            const indicator = document.querySelector('.viewport-indicator');
+            indicator.textContent = `Viewport: ${window.innerWidth}px`;
+        }
+        
+        window.addEventListener('resize', updateViewportDisplay);
+        updateViewportDisplay();
+    </script>
+</body>
+</html>
