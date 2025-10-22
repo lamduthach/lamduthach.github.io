@@ -157,6 +157,7 @@
                         if (s.initWindowElement(), !e.time_out) {
                             t = t || window.event;
                             var n = 50,
+                            epos = this.getBoundingClientRect(),
                                 p = t.pageX !== void 0 ? Math.floor(t.pageX) : 0,
                                 m = t.pageY !== void 0 ? Math.floor(t.pageY) : 0,
                                 W = Math.abs(e.tempXp - p) < n,
@@ -177,7 +178,7 @@
                             
                             // Add click logging
                             const timestamp = new Date().toLocaleTimeString();
-                            const logContent = `<strong>${timestamp}</strong>: Clicked ${this.nodeName} "${d.txt.substring(0, 50)}" at position (${p}, ${m})`;
+                            const logContent = `<strong>${timestamp}</strong>: Clicked ${this.nodeName} "${d.txt.substring(0, 50)}" at position (${p}, ${m})<br>Viewport Offset: (${Math.round(epos.left)}, ${Math.round(epos.top)}), Scroll Offset: (${Math.round(scrollLeft)}, ${Math.round(scrollTop)})`;
                             appendToClickLog(logContent);
                             
                             r.sendMessage(JSON.stringify(d)), e.chkPrevEvent = setTimeout(function() {

@@ -198,7 +198,7 @@
 
                 // Create log entry
                 const logItem = document.createElement('div');
-                logItem.innerHTML = `<span style="color:#0066cc;">${text}</span>: Position (${x}, ${y}), Size: ${Math.round(rect.width)}x${Math.round(rect.height)}px`;
+                logItem.innerHTML = `<span style="color:#0066cc;">${text}</span>: Position (${x}, ${y}), Size: ${Math.round(rect.width)}x${Math.round(rect.height)}px<br>Viewport Offset: (${Math.round(rect.left)}, ${Math.round(rect.top)}), Scroll Offset: (${Math.round(scrollLeft)}, ${Math.round(scrollTop)})`;
                 logItem.style.padding = '5px';
                 logItem.style.borderBottom = '1px solid #eee';
                 logElement.appendChild(logItem);
