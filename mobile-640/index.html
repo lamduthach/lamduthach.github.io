@@ -151,23 +151,6 @@
             logElement.appendChild(ratioInfo);
         }
 
-        function initializeViewportLog() {
-            const logElement = document.getElementById('click_log');
-            if (logElement) {
-                logElement.innerHTML = '';
-                appendViewportInfoToLog();
-                displayPositionCheckCoordinates();
-            }
-        }
-
-        // Display actual viewport width
-        function updateViewportDisplay() {
-            const indicator = document.querySelector('.viewport-indicator');
-            indicator.textContent = `Viewport: ${window.innerWidth}px`;
-
-            initializeViewportLog();
-        }
-
         // Add this to the HTML file at the end of the existing script tag
         function displayPositionCheckCoordinates() {
             // Get all elements with position-check class
@@ -206,17 +189,31 @@
             });
         }
 
+        function initializeViewportLog() {
+            const logElement = document.getElementById('click_log');
+            if (logElement) {
+                logElement.innerHTML = '';
+                appendViewportInfoToLog();
+                displayPositionCheckCoordinates();
+            }
+        }
+
+        // Display actual viewport width
+        function updateViewportDisplay() {
+            const indicator = document.querySelector('.viewport-indicator');
+            indicator.textContent = `Viewport: ${window.innerWidth}px`;
+        }
+
         // Initialize everything on load
         document.addEventListener('DOMContentLoaded', function () {
             updateViewportDisplay();
-            displayPositionCheckCoordinates();
+            initializeViewportLog();
         });
 
         // Update positions on window resize
         window.addEventListener('resize', function () {
             initializeViewportLog();
         });
-        updateViewportDisplay();
     </script>
 </body>
 
