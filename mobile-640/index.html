@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="target-densitydpi=device-dpi, width=640, user-scalable=no">
@@ -11,7 +12,7 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
         }
-        
+
         .container {
             width: 600px;
             margin: 0 auto;
@@ -20,7 +21,7 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .viewport-indicator {
             position: fixed;
             bottom: 10px;
@@ -31,7 +32,7 @@
             border-radius: 20px;
             font-size: 14px;
         }
-        
+
         .box {
             height: 100px;
             margin: 15px 0;
@@ -41,17 +42,17 @@
             color: white;
             font-weight: bold;
         }
-        
+
         .box-full {
             width: 600px;
             background-color: #3498db;
         }
-        
+
         .box-half {
             width: 300px;
             background-color: #e74c3c;
         }
-        
+
         .box-quarter {
             width: 150px;
             background-color: #2ecc71;
@@ -74,45 +75,98 @@
         })();
     </script>
 </head>
+
 <body>
     <div class="container">
         <h1>Fixed 640px Viewport Example</h1>
-        
+
         <p>This page demonstrates a viewport with a fixed width of 640px using the meta tag:</p>
-        
+
         <pre><code>&lt;meta name="viewport" content="target-densitydpi=device-dpi, width=640, user-scalable=no"&gt;</code></pre>
-        
+
         <p>This configuration:</p>
         <ul>
-            <li><strong>target-densitydpi=device-dpi</strong>: Attempts to match the screen's native DPI (deprecated but included as requested)</li>
+            <li><strong>target-densitydpi=device-dpi</strong>: Attempts to match the screen's native DPI (deprecated but
+                included as requested)</li>
             <li><strong>width=640</strong>: Sets the viewport width to exactly 640px regardless of device</li>
             <li><strong>user-scalable=no</strong>: Prevents users from zooming in or out</li>
         </ul>
 
         <div id="click_log">
         </div>
-        
-        <div class="box box-full">600px Width Box (Full Container)</div>
-        
+
+        <label class="box box-full position-check">600px Width Box (Full Container)</label>
+
         <div class="box-sizes">
-            <div class="box box-half">300px Width</div>
-            <div class="box box-quarter">150px Width</div>
+            <label class="box box-half position-check">300px Width</label>
+            <label class="box box-quarter position-check">150px Width</label>
         </div>
-        
-        <p>Note: This fixed 640px approach means the layout will be consistent across devices, but may appear small on high-resolution screens or large on small screens.</p>
+
+        <p>Note: This fixed 640px approach means the layout will be consistent across devices, but may appear small on
+            high-resolution screens or large on small screens.</p>
     </div>
-    
+
     <div class="viewport-indicator">Viewport: 640px</div>
-    
+
     <script>
         // Display actual viewport width
         function updateViewportDisplay() {
             const indicator = document.querySelector('.viewport-indicator');
             indicator.textContent = `Viewport: ${window.innerWidth}px`;
         }
-        
-        window.addEventListener('resize', updateViewportDisplay);
+
+        // Add this to the HTML file at the end of the existing script tag
+        function displayPositionCheckCoordinates() {
+            // Get all elements with position-check class
+            const positionElements = document.querySelectorAll('.position-check');
+            const logElement = document.getElementById('click_log');
+
+            if (!logElement) return;
+
+            // Create a header for the position information
+            const headerElement = document.createElement('div');
+            headerElement.innerHTML = '<strong>Element Positions:</strong>';
+            headerElement.style.padding = '5px';
+            headerElement.style.borderBottom = '1px solid #ddd';
+            headerElement.style.backgroundColor = '#f5f5f5';
+            logElement.appendChild(headerElement);
+
+            // For each position-check element, get its coordinates and append to log
+            positionElements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Calculate absolute position
+                const x = Math.round(rect.left + scrollLeft);
+                const y = Math.round(rect.top + scrollTop);
+
+                // Get element text content for identification
+                const text = element.textContent.trim().substring(0, 30) + (element.textContent.length > 30 ? '...' : '');
+
+                // Create log entry
+                const logItem = document.createElement('div');
+                logItem.innerHTML = `<span style="color:#0066cc;">${text}</span>: Position (${x}, ${y}), Size: ${Math.round(rect.width)}x${Math.round(rect.height)}px`;
+                logItem.style.padding = '5px';
+                logItem.style.borderBottom = '1px solid #eee';
+                logElement.appendChild(logItem);
+            });
+        }
+
+        // Run when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', displayPositionCheckCoordinates);
+
+        // Update positions on window resize
+        window.addEventListener('resize', function () {
+            const logElement = document.getElementById('click_log');
+            // Clear previous position entries before updating
+            if (logElement) {
+                logElement.innerHTML = '';
+                displayPositionCheckCoordinates();
+            }
+        });
         updateViewportDisplay();
     </script>
 </body>
+
 </html>
