@@ -15,63 +15,6 @@
   <script>
     const userId = new Date().getTime().toString();
     const tracker = window.initUserTracker('http://localhost:3000', userId);
-    window.addEventListener('message', (event) => {
-      if (event.data.type === 'TRIGGER_PATH_CLICK') {
-        const { path, separator, segmentOnly, index, total } = event.data.data;
-        let element = null;
-
-        console.log(`Receiving click instruction [${index}/${total}]:`, path);
-
-        if (separator === '/') {
-          // XPath
-          try {
-            const result = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
-            element = result.singleNodeValue;
-          } catch (e) {
-            console.warn('XPath failed:', e);
-          }
-        } else {
-          // CSS selector - try multiple strategies
-          try {
-            // Try full path first
-            element = document.querySelector(path);
-
-            // If not found, try just the segment (for first level)
-            if (!element && index === 1) {
-              element = document.querySelector(segmentOnly);
-            }
-
-            // If still not found, try descendant selector instead of child
-            if (!element) {
-              const descendantPath = path.replace(/ > /g, ' ');
-              element = document.querySelector(descendantPath);
-            }
-          } catch (e) {
-            console.warn('CSS selector failed:', e);
-          }
-        }
-
-        if (element) {
-          console.log(`✓ Found element:`, element);
-          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          element.style.outline = '3px solid #ff0000';
-          element.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
-
-          // Use setTimeout to ensure element is visible before clicking
-          setTimeout(() => {
-            element.click();
-            console.log(`✓ Clicked element [${index}/${total}]`);
-          }, 100);
-
-          setTimeout(() => {
-            element.style.outline = '';
-            element.style.backgroundColor = '';
-          }, 700);
-        } else {
-          console.warn(`✗ Could not find element [${index}/${total}] with path:`, path);
-        }
-      }
-    });
   </script>
 </head>
 

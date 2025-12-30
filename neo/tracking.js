@@ -159,6 +159,56 @@ var UserTracker = (() => {
       this.userId = userId;
     }
   };
+  if (typeof window !== "undefined") {
+    window.addEventListener("message", (event) => {
+      if (event.data.type === "TRIGGER_CLICK") {
+        const { xpath, elementPath, x, y, element, index, total } = event.data.data;
+        let targetElement = null;
+        console.log(`Receiving click [${index}/${total}]:`, element || elementPath);
+        if (xpath) {
+          try {
+            const result = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+            targetElement = result.singleNodeValue;
+            if (targetElement) console.log("\u2713 Found by XPath");
+          } catch (e) {
+            console.warn("XPath failed:", e);
+          }
+        }
+        if (!targetElement && elementPath) {
+          try {
+            targetElement = document.querySelector(elementPath);
+            if (targetElement) console.log("\u2713 Found by elementPath");
+            if (!targetElement) {
+              const descendantPath = elementPath.replace(/ > /g, " ");
+              targetElement = document.querySelector(descendantPath);
+              if (targetElement) console.log("\u2713 Found by descendant selector");
+            }
+          } catch (e) {
+            console.warn("CSS selector failed:", e);
+          }
+        }
+        if (!targetElement && x && y) {
+          targetElement = document.elementFromPoint(x, y);
+          if (targetElement) console.log("\u2713 Found by position");
+        }
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: "smooth", block: "center" });
+          targetElement.style.outline = "3px solid #ff0000";
+          targetElement.style.backgroundColor = "rgba(255, 0, 0, 0.1)";
+          setTimeout(() => {
+            targetElement.click();
+            console.log(`\u2713 Clicked [${index}/${total}]`);
+          }, 100);
+          setTimeout(() => {
+            targetElement.style.outline = "";
+            targetElement.style.backgroundColor = "";
+          }, 700);
+        } else {
+          console.warn(`\u2717 Could not find element [${index}/${total}]`);
+        }
+      }
+    });
+  }
   globalThis.UserTracker = UserTracker;
   if (typeof window !== "undefined") {
     window.UserTracker = UserTracker;
