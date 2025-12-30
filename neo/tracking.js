@@ -162,6 +162,9 @@ var UserTracker = (() => {
   globalThis.UserTracker = UserTracker;
   if (typeof window !== "undefined") {
     window.UserTracker = UserTracker;
+    window.initUserTracker = function(apiEndpoint, userId) {
+      return new UserTracker(apiEndpoint, userId);
+    };
   }
   var tracking_default = UserTracker;
   return __toCommonJS(tracking_exports);

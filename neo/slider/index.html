@@ -56,7 +56,8 @@
 
   <script src="../tracking.js"></script>
   <script>
-    const tracker = new UserTracker('http://localhost:3000', 'optional-user-id');
+    const userId = new Date().getTime().toString();
+    const tracker = new UserTracker('http://localhost:3000', userId);
   </script>
 </head>
 
