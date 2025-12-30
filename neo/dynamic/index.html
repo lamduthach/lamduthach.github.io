@@ -16,39 +16,32 @@
     const userId = new Date().getTime().toString();
     const tracker = window.initUserTracker('http://localhost:3000', userId);
     window.addEventListener('message', (event) => {
-      if (event.data.type === 'TRIGGER_CLICK') {
-        const { xpath, elementPath, x, y } = event.data.data;
+      if (event.data.type === 'TRIGGER_PATH_CLICK') {
+        const { path, separator } = event.data.data;
         let element = null;
 
-        // Try XPath
-        if (xpath) {
+        if (separator === '/') {
+          // XPath
           try {
-            const result = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
+            const result = document.evaluate('/' + path.split(' / ').join('/'), document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null);
             element = result.singleNodeValue;
           } catch (e) { console.warn('XPath failed:', e); }
-        }
-
-        // Try CSS selector
-        if (!element && elementPath) {
+        } else {
+          // CSS selector
           try {
-            const selector = elementPath.split('>').map(s => s.trim()).join(' > ');
-            element = document.querySelector(selector);
+            element = document.querySelector(path);
           } catch (e) { console.warn('CSS selector failed:', e); }
         }
 
-        // Try position
-        if (!element) {
-          element = document.elementFromPoint(x, y);
-        }
-
         if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
           element.style.outline = '3px solid #ff0000';
           element.style.backgroundColor = 'rgba(255, 0, 0, 0.1)';
           element.click();
           setTimeout(() => {
             element.style.outline = '';
             element.style.backgroundColor = '';
-          }, 500);
+          }, 700);
         }
       }
     });
