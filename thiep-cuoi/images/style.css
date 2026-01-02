@@ -195,7 +195,7 @@ img {
 
 .video-container {
   position: relative;
-  padding-top: 35%; /* 16:9 = 9 / 16 * 100 */
+  padding-top: 28%;
 }
 
 .video-container iframe {
