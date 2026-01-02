@@ -7847,7 +7847,7 @@ img {
   .donate-box .donate-card{width:100%;margin: 20px 5px;}
 }
 .donate-box .donate-card {position:relative;}
-.donate-box .donate-card .qr-code-image{max-width: 150px;border: 1px solid #ccc;padding: 3px;margin: auto;display: block;}
+.donate-box .donate-card .qr-code-image{max-width: 150px; max-height: 210px;border: 1px solid #ccc;padding: 3px;margin: auto;display: block;}
 .donate-box .cryptos-box {border-top: 1px solid #f23b43;margin-top: 25px;}
 .donate-box .cryptos-box h4 {margin: 0;margin-top: 20px;text-align: center;}
 .donate-box .cryptos-box .cryptos-items {display: flex;flex-wrap: wrap;justify-content: center;margin-right: -10px;margin-left: -10px;margin-top: 10px;}
