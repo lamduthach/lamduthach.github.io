@@ -70,6 +70,20 @@
     }, 10000); // 10 seconds
 </script>
 
+<script>
+    setTimeout(function() {
+        var mierucaScript = document.createElement('script');
+        mierucaScript.type = 'text/javascript';
+        mierucaScript.id = 'mierucaOptimizejs';
+        mierucaScript.text = "window.__optimizeid = window.__optimizeid || [];__optimizeid.push([1019935375]);\n" +
+            "(function () {var fjs = document.createElement('script');fjs.type = 'text/javascript';\n" +
+            "fjs.async = true;fjs.id = 'fjssync';var timestamp = new Date;fjs.src = 'https://opt.mieru-ca.com/service/js/mieruca-optimize.js?v=' + timestamp.getTime();\n" +
+            "var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(fjs, x);})();";
+
+        document.body.appendChild(mierucaScript);
+    }, 2000); // 2 seconds
+</script>
+
 </body>
 </html>
 
