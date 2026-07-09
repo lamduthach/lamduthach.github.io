@@ -58,7 +58,7 @@
     }
     var g = {
         popupEndpoint: "dev.hpjp.mieru-ca.com/embed",
-        wsEndpoint: "dev-ntjp-ecs.mieru-ca.com/hm"
+        wsEndpoint: "dev.ntjp.mieru-ca.com/hm"
     };
     function E(e, t, n=window.location) {
         let o = `${n.protocol}//${g.popupEndpoint}`
