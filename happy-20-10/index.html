@@ -16,7 +16,7 @@
 <meta property="og:title" content="Gửi Tiểu Bảo Bối ♥ – Chúc mừng 20/10">
 <meta property="og:description" content="Một tấm thiệp nhỏ, rất nhiều hoa, và tất cả thương yêu anh dành cho em.">
 <meta property="og:image" content="https://lamduthach.github.io/happy-20-10/images/photo-1.jpg">
-<meta property="og:url" content="https://lamduthach.github.io/happy-20-10/v2.html">
+<meta property="og:url" content="https://lamduthach.github.io/happy-20-10/">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
@@ -844,7 +844,8 @@ footer { position: relative; padding: 70px 20px 110px; text-align: center; overf
        5. ALBUM ẢNH — đặt ảnh vào ./images/photo-1.jpg ... photo-6.jpg
        Thiếu ảnh nào thì ô đó tự hiện nền gradient + bông hoa.
        ========================================================= -->
-  <section class="gallery" id="gallery" aria-labelledby="ph-title">
+  <!-- Đang ẩn vì chưa có ảnh — xoá thuộc tính "hidden" ở dòng dưới để hiện lại -->
+  <section class="gallery" id="gallery" aria-labelledby="ph-title" hidden>
     <div class="wrap">
       <svg class="divider" viewBox="0 0 240 34" aria-hidden="true"><use href="#divider"/></svg>
       <span class="kicker" style="margin-top:22px">Vuốt để xem</span>
@@ -960,7 +961,8 @@ footer { position: relative; padding: 70px 20px 110px; text-align: center; overf
   <!-- =========================================================
        8. QUÀ BẤT NGỜ
        ========================================================= -->
-  <section id="gift" aria-labelledby="gift-title">
+  <!-- Đang ẩn — xoá thuộc tính "hidden" ở dòng dưới để hiện lại -->
+  <section id="gift" aria-labelledby="gift-title" hidden>
     <div class="wrap">
       <svg class="divider" viewBox="0 0 240 34" aria-hidden="true"><use href="#divider"/></svg>
       <span class="kicker" style="margin-top:22px">Còn một điều nữa</span>
@@ -1014,7 +1016,7 @@ footer { position: relative; padding: 70px 20px 110px; text-align: center; overf
      CẤU HÌNH
      ========================================================= */
   // TODO: sửa nội dung ở đây — ngày hai đứa bắt đầu bên nhau, định dạng dd/mm/yyyy
-  const START_DATE = '20/10/2025';
+  const START_DATE = '30/04/2025';
   const GARDEN_GOAL = 7;
 
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
