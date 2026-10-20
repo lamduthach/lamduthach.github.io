@@ -1000,7 +1000,7 @@ footer { position: relative; padding: 70px 20px 110px; text-align: center; overf
   <p class="year">20 · 10 · 2026</p>
 </footer>
 
-<!-- Nhạc nền: tắt mặc định, chỉ phát khi bấm nút -->
+<!-- Nhạc nền: tự phát khi chạm mở phong bì, bấm nút góc phải để tắt/bật -->
 <!-- TODO: sửa nội dung ở đây — đổi tên file nhạc nếu cần (hiện dùng ./cham-hoa.mp3 có sẵn trong thư mục) -->
 <audio id="bgm" src="./cham-hoa.mp3" preload="none" loop></audio>
 <button class="music" id="musicBtn" type="button" aria-pressed="false" aria-label="Bật nhạc nền" hidden>
@@ -1260,6 +1260,7 @@ footer { position: relative; padding: 70px 20px 110px; text-align: center; overf
   card.inert = true; $('#foot').inert = true;
   envelope.addEventListener('click', () => {
     envelope.classList.add('open');
+    playMusic(); // gọi ngay trong lần chạm thì trình duyệt mới cho phát nhạc
     envelope.setAttribute('aria-expanded', 'true');
     setTimeout(() => { const [x, y] = centerOf(envelope); burst(x, y - 40, 70); }, RM ? 0 : 700);
     setTimeout(() => {
@@ -1400,21 +1401,26 @@ footer { position: relative; padding: 70px 20px 110px; text-align: center; overf
   });
 
   /* =========================================================
-     NHẠC NỀN — không bao giờ tự phát
+     NHẠC NỀN — tự phát khi chạm mở phong bì
+     (trình duyệt điện thoại chặn phát nhạc trước khi người xem chạm vào trang,
+      nên lần chạm mở phong bì chính là lúc sớm nhất có thể bật nhạc)
      ========================================================= */
   const bgm = $('#bgm');
   bgm.volume = .6;
-  musicBtn.addEventListener('click', async () => {
+  async function playMusic() {
+    try {
+      await bgm.play();
+      musicBtn.setAttribute('aria-pressed', 'true');
+      musicBtn.setAttribute('aria-label', 'Tắt nhạc nền');
+      musicBtn.classList.remove('err');
+    } catch (err) {
+      musicBtn.classList.add('err');
+      musicBtn.title = 'Không phát được nhạc';
+    }
+  }
+  musicBtn.addEventListener('click', () => {
     if (bgm.paused) {
-      try {
-        await bgm.play();
-        musicBtn.setAttribute('aria-pressed', 'true');
-        musicBtn.setAttribute('aria-label', 'Tắt nhạc nền');
-        musicBtn.classList.remove('err');
-      } catch (err) {
-        musicBtn.classList.add('err');
-        musicBtn.title = 'Không phát được nhạc';
-      }
+      playMusic();
     } else {
       bgm.pause();
       musicBtn.setAttribute('aria-pressed', 'false');
