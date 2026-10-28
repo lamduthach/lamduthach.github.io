@@ -63,11 +63,6 @@
 
   <h2>GA4 exclusion check</h2>
   <div id="verdict" class="verdict">Checking…</div>
-  <p class="sub" style="margin-top:8px">
-    Pattern (full match, as GTM's Regex Table does), from the help article
-    <a href="https://fabercompany.zendesk.com/hc/ja/articles/8968587526041">【ヒートマップ】ユーザーエージェントを利用してキャプチャアクセスを除外する方法（GA4）</a>:<br>
-    <code id="pattern"></code>
-  </p>
 
   <h2>navigator.userAgent</h2>
   <div id="ua" class="code ua"></div>
@@ -77,7 +72,6 @@
 </main>
 
 <script>
-  // Same pattern as the help article; GTM's Regex Table matches the whole value by default.
   var GA4_PATTERN = /^.*MierucaHeatmap\/1\.0 \(heatmap\(at\)fabercompany\.co\.jp\)$/;
   var SUFFIX = 'MierucaHeatmap/1.0 (heatmap(at)fabercompany.co.jp)';
 
@@ -89,8 +83,6 @@
 
   var ua = navigator.userAgent;
   var matched = GA4_PATTERN.test(ua);
-
-  document.getElementById('pattern').textContent = '.*MierucaHeatmap\\/1\\.0 \\(heatmap\\(at\\)fabercompany\\.co\\.jp\\)';
 
   var verdict = document.getElementById('verdict');
   verdict.className = 'verdict ' + (matched ? 'ok' : 'ng');
