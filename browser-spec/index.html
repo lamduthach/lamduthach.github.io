@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browser spec</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1f2328;
+    --muted: #59636e;
+    --line: #d1d9e0;
+    --code-bg: #f6f8fa;
+    --ok-bg: #dafbe1;
+    --ok-fg: #116329;
+    --ng-bg: #ffebe9;
+    --ng-fg: #a40e26;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px 40px;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  }
+  main { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  h2 { font-size: 15px; margin: 28px 0 8px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .sub { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
+  .verdict {
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .verdict.ok { background: var(--ok-bg); color: var(--ok-fg); }
+  .verdict.ng { background: var(--ng-bg); color: var(--ng-fg); }
+  .verdict small { display: block; font-size: 15px; font-weight: 400; margin-top: 4px; }
+  code, .code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  .code { display: block; padding: 12px; font-size: 18px; word-break: break-all; white-space: pre-wrap; }
+  .ua mark { background: #fff8c5; color: inherit; padding: 0 2px; border-radius: 3px; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { width: 38%; color: var(--muted); font-weight: 600; }
+  td { word-break: break-all; }
+  @media (max-width: 600px) {
+    th, td { display: block; width: 100%; }
+    th { border-bottom: none; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Browser spec</h1>
+  <p class="sub">What this page sees from the browser that opened it. Used to check the screenshot worker's User-Agent.</p>
+
+  <h2>GA4 exclusion check</h2>
+  <div id="verdict" class="verdict">Checking…</div>
+  <p class="sub" style="margin-top:8px">
+    Pattern (full match, as GTM's Regex Table does), from the help article
+    <a href="https://fabercompany.zendesk.com/hc/ja/articles/8968587526041">【ヒートマップ】ユーザーエージェントを利用してキャプチャアクセスを除外する方法（GA4）</a>:<br>
+    <code id="pattern"></code>
+  </p>
+
+  <h2>navigator.userAgent</h2>
+  <div id="ua" class="code ua"></div>
+
+  <h2>Other browser values</h2>
+  <table><tbody id="spec"></tbody></table>
+</main>
+
+<script>
+  // Same pattern as the help article; GTM's Regex Table matches the whole value by default.
+  var GA4_PATTERN = /^.*MierucaHeatmap\/1\.0 \(heatmap\(at\)fabercompany\.co\.jp\)$/;
+  var SUFFIX = 'MierucaHeatmap/1.0 (heatmap(at)fabercompany.co.jp)';
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  var ua = navigator.userAgent;
+  var matched = GA4_PATTERN.test(ua);
+
+  document.getElementById('pattern').textContent = '.*MierucaHeatmap\\/1\\.0 \\(heatmap\\(at\\)fabercompany\\.co\\.jp\\)';
+
+  var verdict = document.getElementById('verdict');
+  verdict.className = 'verdict ' + (matched ? 'ok' : 'ng');
+  verdict.innerHTML = matched
+    ? 'MATCH<small>navigator.userAgent ends with the MierucaHeatmap suffix</small>'
+    : 'NO MATCH<small>navigator.userAgent has no MierucaHeatmap suffix</small>';
+
+  document.getElementById('ua').innerHTML = escapeHtml(ua).replace(escapeHtml(SUFFIX), '<mark>' + escapeHtml(SUFFIX) + '</mark>');
+
+  var brands = navigator.userAgentData && navigator.userAgentData.brands
+    ? navigator.userAgentData.brands.map(function (b) { return b.brand + ' ' + b.version; }).join(', ')
+    : '(not available)';
+  var rows = [
+    ['navigator.userAgentData.brands', brands],
+    ['navigator.userAgentData.mobile', navigator.userAgentData ? String(navigator.userAgentData.mobile) : '(not available)'],
+    ['navigator.platform', navigator.platform],
+    ['navigator.webdriver', String(navigator.webdriver)],
+    ['navigator.language(s)', (navigator.languages || [navigator.language]).join(', ')],
+    ['Viewport (innerWidth × innerHeight)', window.innerWidth + ' × ' + window.innerHeight],
+    ['Screen (width × height)', screen.width + ' × ' + screen.height],
+    ['devicePixelRatio', String(window.devicePixelRatio)],
+    ['Touch (maxTouchPoints / ontouchstart)', navigator.maxTouchPoints + ' / ' + ('ontouchstart' in window)],
+    ['Time zone', Intl.DateTimeFormat().resolvedOptions().timeZone],
+    ['Page opened at (UTC)', new Date().toISOString()]
+  ];
+  document.getElementById('spec').innerHTML = rows.map(function (r) {
+    return '<tr><th>' + escapeHtml(r[0]) + '</th><td>' + escapeHtml(r[1]) + '</td></tr>';
+  }).join('');
+</script>
+</body>
+</html>
