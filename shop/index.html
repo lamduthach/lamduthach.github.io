@@ -34,25 +34,9 @@
    <link rel="stylesheet" href="css/owl.theme.default.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
       media="screen">
-<!-- Begin Mieruca Embed Code -->
-<script type="text/javascript" id="mierucajs">
-window.__fid = window.__fid || [];__fid.push([596826084]); // dev
-// window.__fid = window.__fid || [];__fid.push([359192189]); // prod
-(function() {
-function mieruca(){if(typeof window.__fjsld != "undefined") return; window.__fjsld = 1; var fjs = document.createElement('script'); fjs.type = 'text/javascript'; fjs.async = true; fjs.id = "fjssync"; var timestamp = new Date;fjs.src = 'https://lamduthach.github.io/js/mieruca-hm.js'; var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(fjs, x); };
-setTimeout(mieruca, 500); document.readyState != "complete" ? (window.attachEvent ? window.attachEvent("onload", mieruca) : window.addEventListener("load", mieruca, false)) : mieruca();
-})();
-</script>
-<!-- End Mieruca Embed Code -->
+{% include mieruca-heatmap-dev-tag.html %}
  
-<!-- Mieruca Optimize Tag -->
-<script type="text/javascript" id="mierucaOptimizejs">
-window.__optimizeid = window.__optimizeid || [];__optimizeid.push([1404818873]);
-(function () {var fjs = document.createElement('script');fjs.type = 'text/javascript';
-fjs.async = true;fjs.id = "fjssync";var timestamp = new Date;fjs.src = 'https://dev.opt.mieru-ca.com/service/js/mieruca-optimize-dev.js?v=' + timestamp.getTime();
-var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(fjs, x);})();
-</script>
-<!-- End Mieruca Optimize Tag -->
+{% include mieruca-optimize-dev.html %}
 </head>
 
 <body>

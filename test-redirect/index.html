@@ -8,16 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My First Webpage</title>
-    <!-- Mieruca Optimize Dev Tag -->
-    <script type="text/javascript" id="mierucaOptimizejs">
-        window.__optimizeid = window.__optimizeid || []; __optimizeid.push([1404818873]);
-        (function () {
-            var fjs = document.createElement('script'); fjs.type = 'text/javascript';
-            fjs.async = true; fjs.id = "fjssync"; var timestamp = new Date; fjs.src = 'https://dev.opt.mieru-ca.com/service/js/mieruca-optimize-dev.js?v=' + timestamp.getTime();
-            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(fjs, x);
-        })();
-    </script>
-    <!-- End Mieruca Optimize Dev Tag -->
+    {% include mieruca-optimize-dev.html %}
 </head>
 
 <body>
