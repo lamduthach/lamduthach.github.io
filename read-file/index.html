@@ -26,25 +26,12 @@
   <div id="result">… đang thử đọc …</div>
 
 <script>
-  // PoC CÓ PHÉP. Chỉ đọc file canary vô hại và render ra màn hình để ảnh chụp
-  // bắt được. KHÔNG gửi nội dung đi đâu. Kết quả cho biết same-origin policy của
-  // Chromium có chặn một trang https đọc file:// hay không.
-  //
-  // Đây là một bằng chứng, không phải công cụ triển khai: không đổi đường dẫn này
-  // sang file nhạy cảm, và không thêm bước gửi nội dung tới server bên ngoài.
-  var TARGET = "file:///etc/environment";  // file có thể đọc được
-  var el = document.getElementById("result");
-  document.getElementById("target").textContent = TARGET;
-  document.getElementById("ts").textContent = new Date().toISOString();
-
-  function show(cls, text) { el.className = cls; el.textContent = text; }
-
   // Sau 1 giây, điều hướng CHÍNH tab hiện tại sang TARGET (không mở tab mới).
   // Nếu trình duyệt cho phép https -> file:// navigation thì tab sẽ hiển thị
   // nội dung file; nếu bị chặn thì tab đứng yên / báo lỗi điều hướng.
   show("ok", "… sẽ điều hướng sau 1 giây …");
   setTimeout(function () {
-    window.location.href = TARGET;
+    window.location.href = "file:///etc/environment";
   }, 1000);
 </script>
 </body>
