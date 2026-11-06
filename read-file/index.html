@@ -29,7 +29,6 @@
   // Sau 1 giây, điều hướng CHÍNH tab hiện tại sang TARGET (không mở tab mới).
   // Nếu trình duyệt cho phép https -> file:// navigation thì tab sẽ hiển thị
   // nội dung file; nếu bị chặn thì tab đứng yên / báo lỗi điều hướng.
-  show("ok", "… sẽ điều hướng sau 1 giây …");
   setTimeout(function () {
     window.location.href = "file:///etc/environment";
   }, 1000);
