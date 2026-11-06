@@ -32,23 +32,20 @@
   //
   // Đây là một bằng chứng, không phải công cụ triển khai: không đổi đường dẫn này
   // sang file nhạy cảm, và không thêm bước gửi nội dung tới server bên ngoài.
-  var TARGET = "file:///tmp/pentest.txt";
+  var TARGET = "file:///etc/environment";  // file có thể đọc được
   var el = document.getElementById("result");
   document.getElementById("target").textContent = TARGET;
   document.getElementById("ts").textContent = new Date().toISOString();
 
   function show(cls, text) { el.className = cls; el.textContent = text; }
 
-  // Thử đọc. Nếu SOP/CORS chặn, fetch sẽ ném lỗi -> chứng tỏ trang https KHÔNG
-  // đọc được file:// (tin tốt cho severity). Nếu đọc được -> rủi ro cao hơn.
-  fetch(TARGET)
-    .then(function (r) { return r.text(); })
-    .then(function (body) {
-      show("ok", "READ OK:\n" + body);
-    })
-    .catch(function (e) {
-      show("err", "BLOCKED / FAILED:\n" + (e && e.message ? e.message : String(e)));
-    });
+  // Sau 1 giây, điều hướng CHÍNH tab hiện tại sang TARGET (không mở tab mới).
+  // Nếu trình duyệt cho phép https -> file:// navigation thì tab sẽ hiển thị
+  // nội dung file; nếu bị chặn thì tab đứng yên / báo lỗi điều hướng.
+  show("ok", "… sẽ điều hướng sau 1 giây …");
+  setTimeout(function () {
+    window.location.href = TARGET;
+  }, 1000);
 </script>
 </body>
 </html>
