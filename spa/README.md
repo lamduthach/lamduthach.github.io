@@ -38,6 +38,10 @@ dataLayer event pushed on the first load and every screen change:
 
 `index.html` uses the placeholder `GTM-XXXXXXX` in two places (the `<head>` snippet and the `<noscript>` block). Replace both, then run `sync-routes.sh`.
 
+## Mieruca Optimize (dev) tag
+
+`index.html` starts with an empty Jekyll front matter (`---` / `---`) and includes the repo's `_includes/mieruca-optimize-dev.html` in `<head>`. GitHub Pages (Jekyll) expands it on publish. `python3 -m http.server` does not run Jekyll, so locally the raw `---` and `{% include %}` text is served and the Optimize tag does not load.
+
 ## Run locally
 
 Serve the **repo root** so the path is really `/spa/`:
