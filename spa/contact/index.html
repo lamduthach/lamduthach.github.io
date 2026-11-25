@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPA Test</title>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+  <!-- ============================================================
+       Google Tag Manager
+       TODO: GTM-XXXXXXX is a placeholder. Replace it with the real
+       container ID here AND in the <noscript> block below, then run
+       sync-routes.sh.
+       ============================================================ -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+  <!-- End Google Tag Manager -->
+
+  <link rel="stylesheet" href="/spa/assets/style.css">
+  <script src="/spa/assets/app.js" defer></script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript). TODO: replace GTM-XXXXXXX with the real container ID. -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="site-header">
+    <a class="brand" href="/spa/" data-link>SPA Test</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/spa/" data-link data-screen="home">Home</a>
+      <a href="/spa/products/" data-link data-screen="products">Products</a>
+      <a href="/spa/contact/" data-link data-screen="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <p class="loading">Loading…</p>
+  </main>
+
+  <div id="debug-panel" hidden>
+    <strong>Last dataLayer push</strong>
+    <pre id="debug-output"></pre>
+  </div>
+</body>
+</html>
