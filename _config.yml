@@ -1,0 +1,6 @@
+# Jekyll skips files and folders whose name starts with "_". The Next.js test
+# site (spa-next/, built from _spa-next-src/) needs its "_next" folder and the
+# "_app-*.js", "_error-*.js", "_buildManifest.js", "_ssgManifest.js" files in it.
+include:
+  - _next
+  - "_*.js"

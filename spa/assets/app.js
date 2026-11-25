@@ -31,9 +31,12 @@
           '<p class="cta-result" data-cta-result></p>' +
         '</section>' +
         '<div class="blocks">' +
-          '<div class="products-block"><h2>Starter</h2><p>For small sites. 1 project.</p></div>' +
-          '<div class="products-block"><h2>Business</h2><p>For growing teams. 10 projects.</p></div>' +
-          '<div class="products-block"><h2>Enterprise</h2><p>For large sites. Unlimited projects.</p></div>' +
+          '<div class="products-block"><h2>Starter</h2><p>For small sites. 1 project.</p>' +
+            '<a href="' + BASE + 'products/1/" data-link>View details</a></div>' +
+          '<div class="products-block"><h2>Business</h2><p>For growing teams. 10 projects.</p>' +
+            '<a href="' + BASE + 'products/2/" data-link>View details</a></div>' +
+          '<div class="products-block"><h2>Enterprise</h2><p>For large sites. Unlimited projects.</p>' +
+            '<a href="' + BASE + 'products/3/" data-link>View details</a></div>' +
         '</div>'
     },
     contact: {
@@ -54,6 +57,33 @@
     }
   };
 
+  // Product detail screens: /spa/products/<id>/ (one screen per ID, like a
+  // tour detail page). Keep the IDs in sync with ROUTES in sync-routes.sh.
+  var PRODUCTS = {
+    '1': { name: 'Starter', desc: 'For small sites. 1 project.' },
+    '2': { name: 'Business', desc: 'For growing teams. 10 projects.' },
+    '3': { name: 'Enterprise', desc: 'For large sites. Unlimited projects.' }
+  };
+
+  function productScreen(id) {
+    var p = PRODUCTS[id];
+    return {
+      title: p.name + ' | Products | SPA Test',
+      html:
+        '<section class="hero">' +
+          '<p><a href="' + BASE + 'products/" data-link>&larr; All products</a></p>' +
+          '<h1 id="product-title">' + p.name + ' plan</h1>' +
+          '<p>' + p.desc + '</p>' +
+          '<button id="product-cta" type="button">Choose ' + p.name + '</button>' +
+          '<p class="cta-result" data-cta-result></p>' +
+        '</section>' +
+        '<div class="blocks">' +
+          '<div class="product-block"><h2>Product ID</h2><p>' + id + '</p></div>' +
+          '<div class="product-block"><h2>Path</h2><p>' + BASE + 'products/' + id + '/</p></div>' +
+        '</div>'
+    };
+  }
+
   var app = document.getElementById('app');
   var pendingRender = null;
 
@@ -70,11 +100,18 @@
     return isNaN(n) || n < 0 ? 0 : n;
   }
 
-  // Unknown paths (e.g. /spa/index.html) fall back to home.
-  function screenFromPath(pathname) {
-    if (pathname.indexOf(BASE + 'products') === 0) return 'products';
-    if (pathname.indexOf(BASE + 'contact') === 0) return 'contact';
-    return 'home';
+  // Returns { name, nav, screen } for a path. name is the screen_name pushed to
+  // the dataLayer; nav is the top link to highlight.
+  // Unknown paths (e.g. /spa/index.html, /spa/products/9/) fall back to the
+  // closest known screen.
+  function resolve(pathname) {
+    var m = pathname.match(/^\/spa\/products\/([^/]+)\/?$/);
+    if (m && PRODUCTS[m[1]]) {
+      return { name: 'product_detail', nav: 'products', screen: productScreen(m[1]) };
+    }
+    if (pathname.indexOf(BASE + 'products') === 0) return { name: 'products', nav: 'products', screen: SCREENS.products };
+    if (pathname.indexOf(BASE + 'contact') === 0) return { name: 'contact', nav: 'contact', screen: SCREENS.contact };
+    return { name: 'home', nav: 'home', screen: SCREENS.home };
   }
 
   function pushScreenChange(name, navigationType) {
@@ -109,17 +146,16 @@
     }
   }
 
-  function draw(name, navigationType) {
-    var screen = SCREENS[name];
-    document.title = screen.title;
-    app.className = 'screen-' + name;
-    app.innerHTML = screen.html;
-    pushScreenChange(name, navigationType);
+  function draw(route, navigationType) {
+    document.title = route.screen.title;
+    app.className = 'screen-' + route.name;
+    app.innerHTML = route.screen.html;
+    pushScreenChange(route.name, navigationType);
   }
 
   function render(navigationType) {
-    var name = screenFromPath(location.pathname);
-    updateNav(name);
+    var route = resolve(location.pathname);
+    updateNav(route.nav);
 
     // A newer navigation cancels a delayed render that has not happened yet.
     if (pendingRender !== null) {
@@ -133,10 +169,10 @@
       app.innerHTML = '<p class="loading">Loading…</p>';
       pendingRender = setTimeout(function () {
         pendingRender = null;
-        draw(name, navigationType);
+        draw(route, navigationType);
       }, delay);
     } else {
-      draw(name, navigationType);
+      draw(route, navigationType);
     }
   }
 
