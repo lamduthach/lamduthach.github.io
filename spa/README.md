@@ -56,9 +56,9 @@ dataLayer event pushed on the first load and every screen change:
 
 ## GTM setup
 
-The Mieruca tags are loaded **only through GTM**, the same way a client using GTM loads them. Until a real container ID is set, no Mieruca tag runs on this site.
+The Mieruca tags are loaded **only through GTM**, the same way a client using GTM loads them. Both sites use container `GTM-P8BL6SNQ`, the same container as the other pages of lamduthach.github.io. The Mieruca tags fire only on the `screen_change` event, which only these two sites push, so the other pages are not affected.
 
-1. Replace the placeholder `GTM-XXXXXXX`:
+1. To change the container ID:
    - this site: `index.html`, in the `<head>` snippet and the `<noscript>` block, then run `bash spa/sync-routes.sh`;
    - the Next.js site: `_spa-next-src/pages/_document.js` (`GTM_ID`), then run `bash _spa-next-src/build.sh`.
 2. In the container, add one Custom HTML tag per Mieruca tag (dev environment). Paste the content of:

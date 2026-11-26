@@ -1,9 +1,9 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
-// TODO: GTM-XXXXXXX is a placeholder. Replace it in both places below, then
-// run build.sh. The Mieruca tags (Optimize dev, Heatmap dev) are loaded only
-// through GTM, the same way the client loads them.
-const GTM_ID = 'GTM-XXXXXXX';
+// GTM container shared with the rest of lamduthach.github.io. To change it,
+// edit GTM_ID and run build.sh. The Mieruca tags (Optimize dev, Heatmap dev)
+// are loaded only through GTM, the same way the client loads them.
+const GTM_ID = 'GTM-P8BL6SNQ';
 
 const gtmSnippet =
   "window.dataLayer = window.dataLayer || [];" +
