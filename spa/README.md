@@ -6,13 +6,15 @@ Live URL: https://lamduthach.github.io/spa/
 
 A Next.js (React) version with the same screens, events and flags is at https://lamduthach.github.io/spa-next/ (source in `../_spa-next-src/`).
 
+A hash router version with the same screens, events and flags is at https://lamduthach.github.io/spa-hash/ (`../spa-hash/`: `index.html` and `app.js`, styles shared from `assets/style.css`).
+
 ## Test sites matrix
 
 Three sample sites, differing on two axes: how the URL changes on a screen change (router) and how the screen is drawn (rendering).
 
 | Site | Router | Rendering | Mieruca tags | What it stands for |
 |---|---|---|---|---|
-| 1. https://nguyenvietdiem.github.io/spa-gtm-sample/ | Hash (`#/products`) | Plain JavaScript | Production | SPA with a hash router (optional case) |
+| 1. https://lamduthach.github.io/spa-hash/ | Hash (`#/products`) | Plain JavaScript | Dev | SPA with a hash router |
 | 2. https://lamduthach.github.io/spa/ (this site) | History API (`/spa/products/`) | Plain JavaScript | Dev | SPA with the History API |
 | 3. https://lamduthach.github.io/spa-next/ | History API | React (Next.js Pages Router) | Dev | Closest to a Next.js Pages Router site |
 
@@ -20,7 +22,7 @@ All three push the GTM custom event `screen_change` on the first load and on eve
 
 | Compare | Only difference | If it works on the first site but not on the second, the cause is |
 |---|---|---|
-| Site 2 vs Site 1 | Router (also tag environment) | Hash routing |
+| Site 2 vs Site 1 | Router | Hash routing |
 | Site 2 vs Site 3 | Rendering | React re-rendering overwrites the A/B test change |
 
 ## Structure

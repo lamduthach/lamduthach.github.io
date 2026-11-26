@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPA Test (hash)</title>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+  <!-- ============================================================
+       Google Tag Manager
+       Container GTM-P8BL6SNQ (shared with the rest of the site). To change
+       it, edit the ID here AND in the <noscript> block below.
+       ============================================================ -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P8BL6SNQ');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Mieruca tags (Optimize dev, Heatmap dev) are loaded only through GTM,
+       the same way the client loads them. See spa/README.md "GTM setup". -->
+
+  <link rel="stylesheet" href="/spa/assets/style.css">
+  <script src="/spa-hash/app.js" defer></script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8BL6SNQ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="site-header">
+    <a class="brand" href="#/">SPA Test (hash)</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="#/" data-screen="home">Home</a>
+      <a href="#/products" data-screen="products">Products</a>
+      <a href="#/contact" data-screen="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <p class="loading">Loading…</p>
+  </main>
+
+  <div id="debug-panel" hidden>
+    <strong>Last dataLayer push</strong>
+    <pre id="debug-output"></pre>
+  </div>
+</body>
+</html>
