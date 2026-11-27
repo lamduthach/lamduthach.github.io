@@ -5,7 +5,7 @@ set -euo pipefail
 
 SPA_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Keep products/<id> in sync with PRODUCTS in assets/app.js.
-ROUTES=(products products/1 products/2 products/3 contact)
+ROUTES=(products products/1 products/2 products/3 feed contact)
 
 for route in "${ROUTES[@]}"; do
   mkdir -p "$SPA_DIR/$route"

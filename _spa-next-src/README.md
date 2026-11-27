@@ -17,10 +17,11 @@ See `../spa/README.md` for the test sites matrix, the dataLayer event and the GT
 
 ```
 _spa-next-src/            # source; Jekyll does not publish folders starting with "_"
-├── pages/                # _document.js (GTM), _app.js, index, products/, contact
+├── pages/                # _document.js (GTM), _app.js, index, products/, feed, contact
 ├── components/Layout.js  # header, hero, delay, dataLayer push
+├── components/Feed.js    # Feed screen, React copy of ../spa/assets/feed.js
 ├── lib/products.js       # product IDs 1..3
-├── styles/globals.css    # copy of ../spa/assets/style.css
+├── styles/globals.css    # ../spa/assets/style.css plus Next-only rules for the Feed layout
 ├── next.config.js        # static export, basePath /spa-next, trailing slash
 └── build.sh              # npm ci, next build, copy out/ to ../spa-next/
 ```

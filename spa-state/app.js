@@ -10,6 +10,7 @@
 //   - opening/closing the "Compare plans" modal
 //   - choosing a plan in the wizard
 //   - "Re-render this section" on Products
+//   - comments added on the Feed screen (feed.js pushes `content_append`)
 // page_path is always /spa-state/ because the URL does not change.
 (function () {
   'use strict';
@@ -19,6 +20,7 @@
     home: 'Home',
     products: 'Products',
     wizard: 'Wizard',
+    feed: 'Feed',
     contact: 'Contact'
   };
 
@@ -109,6 +111,16 @@
       '</div>';
   }
 
+  function feedHtml() {
+    return '<section class="hero">' +
+        '<h1 id="feed-title">Customer reviews</h1>' +
+        '<p>A long page. More comments load as you scroll.</p>' +
+        '<button id="feed-cta" type="button">Write a review</button>' +
+        '<p class="cta-result" data-cta-result></p>' +
+      '</section>' +
+      '<div data-feed></div>';
+  }
+
   function wizardHtml() {
     var body = '';
     var back = state.step > 1 ? '<button id="wizard-back" type="button" data-action="back">Back</button>' : '';
@@ -185,6 +197,14 @@
     }
   }
 
+  // Feed screen: comments added while scrolling (see ../spa/assets/feed.js).
+  var feed = null;
+
+  function stopFeed() {
+    if (feed) feed.destroy();
+    feed = null;
+  }
+
   function draw(navigationType) {
     document.title = TITLES[state.screen] + TITLE_SUFFIX;
     app.className = 'screen-' + state.screen;
@@ -195,6 +215,9 @@
       app.innerHTML = contactHtml();
     } else if (state.screen === 'wizard') {
       app.innerHTML = wizardHtml();
+    } else if (state.screen === 'feed') {
+      app.innerHTML = feedHtml();
+      feed = window.SpaFeed.mount(app.querySelector('[data-feed]'), { delayMs: delayMs });
     } else {
       state.renderCount = 1;
       app.innerHTML = productsBlocksHtml();
@@ -206,6 +229,7 @@
   // Every screen paint (first load, tab change, wizard step) goes through here.
   function render(navigationType) {
     closeModal();
+    stopFeed();
     updateTabs();
 
     // A newer paint cancels a delayed one that has not happened yet.

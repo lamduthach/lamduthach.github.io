@@ -36,14 +36,16 @@ spa/
 ├── index.html               # SPA entry (the only one you edit)
 ├── products/index.html      # copies of index.html (generated)
 ├── products/1..3/index.html
+├── feed/index.html
 ├── contact/index.html
 ├── assets/app.js            # router, rendering, dataLayer pushes
+├── assets/feed.js           # Feed screen (shared by spa, spa-hash, spa-state)
 ├── assets/style.css
 ├── sync-routes.sh           # regenerates the copies
 └── README.md
 ```
 
-Screens: `/spa/` (Home), `/spa/products/`, `/spa/products/1/` to `/spa/products/3/` (product detail), `/spa/contact/`. Each route folder holds a copy of `index.html` so a deep link or reload returns HTTP 200 on GitHub Pages; the router picks the screen from `location.pathname`. Product IDs are listed in `PRODUCTS` in `assets/app.js` and `ROUTES` in `sync-routes.sh`; keep them in sync.
+Screens: `/spa/` (Home), `/spa/products/`, `/spa/products/1/` to `/spa/products/3/` (product detail), `/spa/feed/` (Feed), `/spa/contact/`. Each route folder holds a copy of `index.html` so a deep link or reload returns HTTP 200 on GitHub Pages; the router picks the screen from `location.pathname`. Product IDs are listed in `PRODUCTS` in `assets/app.js` and `ROUTES` in `sync-routes.sh`; keep them in sync.
 
 ## Test flags
 
@@ -55,10 +57,28 @@ Flags are kept when you navigate with the links. Every push is also logged to th
 dataLayer event pushed on the first load and every screen change:
 
 ```js
-{ event: 'screen_change', screen_name: 'home|products|product_detail|contact',
+{ event: 'screen_change', screen_name: 'home|products|product_detail|feed|contact',
   page_path: location.pathname, page_title: document.title,
   navigation_type: 'initial' | 'spa' }
 ```
+
+## Feed screen
+
+A long page for testing heatmaps and A/B tests on content that is rendered after the page has loaded. It exists on all four sites: `/spa/feed/`, `/spa-hash/#/feed`, the **Feed** tab on `/spa-state/`, and `/spa-next/feed/`.
+
+- The hero has `#feed-title` ("Customer reviews") and `#feed-cta` ("Write a review").
+- 10 comments are shown first. More are added 10 at a time, up to 100, when the end of the list scrolls into view or when "Load more" (`#feed-load-more`) is clicked. At 100 the list shows "End of feed".
+- The comments are generated from their number, so every run shows the same content in the same place. Each has a "Like (n)" button that only changes its own text.
+- `?delay=<ms>` also delays every batch ("Loading…" is shown in the meantime). Leaving the screen cancels a pending batch.
+- Adding comments is not a screen change, so no `screen_change` is pushed. It pushes its own event, also logged as `[SPA-TEST]` and shown by `?debug=1`:
+
+```js
+{ event: 'content_append', screen_name: 'feed', batch: 2, total: 20 }
+```
+
+`batch` is the 1-based batch number; batch 1 is the first render, which is covered by `screen_change` and not pushed here.
+
+The plain JavaScript sites share `assets/feed.js` (loaded from `/spa/assets/feed.js`). The Next.js site has a React version in `_spa-next-src/components/Feed.js`; keep the comments and sizes in sync.
 
 ## GTM setup
 
@@ -75,7 +95,8 @@ The Mieruca tags are loaded **only through GTM**, the same way a client using GT
 | Scenario | Trigger | Question it answers |
 |---|---|---|
 | A. Load once | Custom Event `screen_change`, fires when `navigation_type` equals `initial` | Do the tags keep working after screen changes without firing again? |
-| B. Fire on every screen change | Custom Event `screen_change`, all custom events | Does firing the tags again on each screen change (controlled by GTM) make the A/B test and heatmap work per screen? |
+| B. Fire on every screen change | Custom Event `screen_change`, all custom events (on the Feed screen this also matches `content_append`) | Does firing the tags again on each screen change (controlled by GTM) make the A/B test and heatmap work per screen? |
+| C. Fire when content is added | Custom Event `content_append` | Do the A/B test and heatmap pick up comments added after the screen was drawn? |
 
 Use one scenario at a time (publish or preview the container with only that trigger), and record which one each result belongs to.
 

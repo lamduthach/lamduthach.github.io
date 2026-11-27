@@ -39,6 +39,18 @@
             '<a href="' + BASE + 'products/3/" data-link>View details</a></div>' +
         '</div>'
     },
+    feed: {
+      path: BASE + 'feed/',
+      title: 'Feed | SPA Test',
+      html:
+        '<section class="hero">' +
+          '<h1 id="feed-title">Customer reviews</h1>' +
+          '<p>A long page. More comments load as you scroll.</p>' +
+          '<button id="feed-cta" type="button">Write a review</button>' +
+          '<p class="cta-result" data-cta-result></p>' +
+        '</section>' +
+        '<div data-feed></div>'
+    },
     contact: {
       path: BASE + 'contact/',
       title: 'Contact | SPA Test',
@@ -110,6 +122,7 @@
       return { name: 'product_detail', nav: 'products', screen: productScreen(m[1]) };
     }
     if (pathname.indexOf(BASE + 'products') === 0) return { name: 'products', nav: 'products', screen: SCREENS.products };
+    if (pathname.indexOf(BASE + 'feed') === 0) return { name: 'feed', nav: 'feed', screen: SCREENS.feed };
     if (pathname.indexOf(BASE + 'contact') === 0) return { name: 'contact', nav: 'contact', screen: SCREENS.contact };
     return { name: 'home', nav: 'home', screen: SCREENS.home };
   }
@@ -146,16 +159,28 @@
     }
   }
 
+  // Feed screen: comments added while scrolling (see feed.js).
+  var feed = null;
+
+  function stopFeed() {
+    if (feed) feed.destroy();
+    feed = null;
+  }
+
   function draw(route, navigationType) {
     document.title = route.screen.title;
     app.className = 'screen-' + route.name;
     app.innerHTML = route.screen.html;
+    if (route.name === 'feed') {
+      feed = window.SpaFeed.mount(app.querySelector('[data-feed]'), { delayMs: delayMs });
+    }
     pushScreenChange(route.name, navigationType);
   }
 
   function render(navigationType) {
     var route = resolve(location.pathname);
     updateNav(route.nav);
+    stopFeed();
 
     // A newer navigation cancels a delayed render that has not happened yet.
     if (pendingRender !== null) {

@@ -15,6 +15,7 @@ function readParams() {
 const NAV = [
   { key: 'home', href: '/', label: 'Home' },
   { key: 'products', href: '/products/', label: 'Products' },
+  { key: 'feed', href: '/feed/', label: 'Feed' },
   { key: 'contact', href: '/contact/', label: 'Contact' },
 ];
 
@@ -37,6 +38,10 @@ export default function Layout({ screenName, nav, title, hero, blocks }) {
   const [ctaText, setCtaText] = useState('');
   const [lastPush, setLastPush] = useState(null);
   const ready = phase !== 'loading';
+  // Lets a screen (the Feed) show its own dataLayer pushes in the debug panel.
+  const reportPush = (payload) => {
+    if (readParams().debug) setLastPush(payload);
+  };
 
   useEffect(() => {
     hydrated = true;
@@ -105,7 +110,7 @@ export default function Layout({ screenName, nav, title, hero, blocks }) {
               <p className="cta-result" data-cta-result>{ctaText}</p>
               <p className="rerender-count">Section rendered {heroVersion + 1} time(s)</p>
             </section>
-            <div className="blocks">{blocks}</div>
+            <div className="blocks">{typeof blocks === 'function' ? blocks(reportPush) : blocks}</div>
           </>
         )}
       </main>

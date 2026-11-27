@@ -21,11 +21,12 @@ Styles are shared from `/spa/assets/style.css`. `app.js` is loaded by the absolu
 
 | Where | Interaction | What changes | `screen_change` pushed? |
 |---|---|---|---|
-| Header tabs (`button[role=tab][data-screen]`) | Click Home / Products / Wizard / Contact | Whole screen; the selected tab gets `aria-current="page"`; `document.title` changes | Yes (`spa`) |
+| Header tabs (`button[role=tab][data-screen]`) | Click Home / Products / Wizard / Feed / Contact | Whole screen; the selected tab gets `aria-current="page"`; `document.title` changes | Yes (`spa`) |
 | Products | `#products-cta` "Compare plans" | Opens a modal (backdrop + dialog, Close button, Esc, backdrop click) | No |
 | Products | `#products-rerender` "Re-render this section" | The whole hero section (including `#products-title`) is replaced by a **new DOM node** built from state, with "Section rendered N time(s)" | No |
 | Wizard | Step 1: Starter / Business / Enterprise | Marks the plan as selected (`aria-pressed`) | No |
 | Wizard | Next / Back / Finish | Next and Back change the step; Finish only shows "Finished ... at <time>" | Next/Back: yes (`spa`); Finish: no |
+| Feed | Scroll down, or "Load more" | 10 more comments (up to 100), see "Feed screen" in `../spa/README.md` | No (`content_append` is pushed instead) |
 | Home, Contact | CTA buttons | "Clicked ... at <time>" | No |
 
 Notes:
@@ -45,14 +46,14 @@ The flags are read from the query on load; the page never rewrites them. Every p
 
 ```js
 { event: 'screen_change',
-  screen_name: 'home' | 'products' | 'contact' |
+  screen_name: 'home' | 'products' | 'feed' | 'contact' |
                'wizard_step_1' | 'wizard_step_2' | 'wizard_step_3',
   page_path: '/spa-state/',          // always, the URL never changes
   page_title: document.title,        // "Products | SPA Test (state)", ...
   navigation_type: 'initial' | 'spa' }
 ```
 
-Pushed on the first load (`initial`), on a tab change and on a wizard step change (`spa`). Not pushed on modal open/close, plan choice or "Re-render this section".
+Pushed on the first load (`initial`), on a tab change and on a wizard step change (`spa`). Not pushed on modal open/close, plan choice, "Re-render this section" or comments added on the Feed screen. The Feed screen pushes `{ event: 'content_append', screen_name: 'feed', batch, total }` instead (shared `/spa/assets/feed.js`).
 
 ## GTM
 
