@@ -17,9 +17,12 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        {/* GTM disabled temporarily
         <script dangerouslySetInnerHTML={{ __html: gtmSnippet }} />
+        */}
       </Head>
       <body>
+        {/* GTM disabled temporarily
         <noscript>
           <iframe
             src={'https://www.googletagmanager.com/ns.html?id=' + GTM_ID}
@@ -28,6 +31,7 @@ export default function Document() {
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
+        */}
         <Main />
         <NextScript />
       </body>
