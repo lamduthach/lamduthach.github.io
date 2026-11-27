@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SPA Test (state)</title>
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+  <!-- ============================================================
+       Google Tag Manager
+       Container GTM-P8BL6SNQ (shared with the rest of the site). To change
+       it, edit the ID here AND in the <noscript> block below.
+       ============================================================ -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P8BL6SNQ');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Mieruca tags (Optimize dev, Heatmap dev) are loaded only through GTM,
+       the same way the client loads them. See spa/README.md "GTM setup". -->
+
+  <link rel="stylesheet" href="/spa/assets/style.css">
+  <style>
+    /* Tabs are <button>s here (the URL never changes), not links. */
+    .site-nav button {
+      padding: 4px 0;
+      border-radius: 0;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      color: #fff;
+    }
+    .site-nav button[aria-current="page"] { border-bottom-color: #f7c948; }
+    .brand { color: #fff; font-weight: 700; }
+
+    .screen-wizard .hero { background: #7b4fd1; }
+    .wizard-steps { margin: 0 0 12px; font-size: 0.9rem; opacity: 0.9; }
+    .wizard-plans { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .wizard-plans button[aria-pressed="true"] { background: #f7c948; font-weight: 700; }
+    .wizard-nav { display: flex; gap: 8px; margin-top: 16px; }
+    .wizard-field { display: block; margin-bottom: 8px; }
+    .wizard-field input {
+      display: block;
+      margin-top: 4px;
+      padding: 8px 10px;
+      font: inherit;
+      border: 0;
+      border-radius: 6px;
+      min-width: 240px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(16, 24, 32, 0.6);
+      z-index: 1000;
+    }
+    .modal {
+      width: 100%;
+      max-width: 420px;
+      padding: 24px;
+      background: #fff;
+      color: #1f2933;
+      border-radius: 8px;
+    }
+    .modal h2 { margin: 0 0 12px; }
+    .modal table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+    .modal th, .modal td { padding: 6px 4px; border-bottom: 1px solid #e4e7eb; text-align: left; }
+    .modal button { background: #1f2933; color: #fff; }
+  </style>
+  <script src="/spa-state/app.js" defer></script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P8BL6SNQ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <header class="site-header">
+    <span class="brand">SPA Test (state)</span>
+    <nav class="site-nav" role="tablist" aria-label="Main">
+      <button type="button" role="tab" data-screen="home">Home</button>
+      <button type="button" role="tab" data-screen="products">Products</button>
+      <button type="button" role="tab" data-screen="wizard">Wizard</button>
+      <button type="button" role="tab" data-screen="contact">Contact</button>
+    </nav>
+  </header>
+
+  <main id="app" aria-live="polite">
+    <p class="loading">Loading…</p>
+  </main>
+
+  <div id="debug-panel" hidden>
+    <strong>Last dataLayer push</strong>
+    <pre id="debug-output"></pre>
+  </div>
+</body>
+</html>
