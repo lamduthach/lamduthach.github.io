@@ -8,22 +8,26 @@ A Next.js (React) version with the same screens, events and flags is at https://
 
 A hash router version with the same screens, events and flags is at https://lamduthach.github.io/spa-hash/ (`../spa-hash/`: `index.html` and `app.js`, styles shared from `assets/style.css`).
 
+A state version where the URL never changes (tabs, modal, wizard) is at https://lamduthach.github.io/spa-state/ (`../spa-state/`: `index.html`, `app.js`, `README.md`; styles shared from `assets/style.css`).
+
 ## Test sites matrix
 
-Three sample sites, differing on two axes: how the URL changes on a screen change (router) and how the screen is drawn (rendering).
+Four sample sites, differing on two axes: how the URL changes on a screen change (router) and how the screen is drawn (rendering).
 
 | Site | Router | Rendering | Mieruca tags | What it stands for |
 |---|---|---|---|---|
 | 1. https://lamduthach.github.io/spa-hash/ | Hash (`#/products`) | Plain JavaScript | Dev | SPA with a hash router |
 | 2. https://lamduthach.github.io/spa/ (this site) | History API (`/spa/products/`) | Plain JavaScript | Dev | SPA with the History API |
 | 3. https://lamduthach.github.io/spa-next/ | History API | React (Next.js Pages Router) | Dev | Closest to a Next.js Pages Router site |
+| 4. https://lamduthach.github.io/spa-state/ | None (the URL never changes) | Plain JavaScript | Dev | SPA whose content changes from state: tabs, modal, wizard |
 
-All three push the GTM custom event `screen_change` on the first load and on every screen change.
+All four push the GTM custom event `screen_change` on the first load and on every screen change (site 4 also on every wizard step, not on modal or re-render).
 
 | Compare | Only difference | If it works on the first site but not on the second, the cause is |
 |---|---|---|
 | Site 2 vs Site 1 | Router | Hash routing |
 | Site 2 vs Site 3 | Rendering | React re-rendering overwrites the A/B test change |
+| Site 2 vs Site 4 | The URL does not change on a screen change | The tool depends on a URL change to detect a new screen |
 
 ## Structure
 
